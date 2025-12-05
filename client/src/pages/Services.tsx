@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { Camera, Clapperboard, BarChart3, PenTool, Smartphone, Globe, Check, Zap } from "lucide-react";
+import { Camera, Clapperboard, PenTool, Smartphone, Check, Zap } from "lucide-react";
 
 export default function Services() {
   const services = [
@@ -23,22 +23,10 @@ export default function Services() {
       features: ["Product Photography", "Brand Films", "Event Coverage", "Drone Footage"]
     },
     {
-      icon: <BarChart3 className="w-10 h-10" />,
-      title: "Paid Advertising",
-      description: "Targeted ad campaigns that convert. We manage your ad spend to maximize ROI on Meta and TikTok.",
-      features: ["Ad Creative", "Audience Targeting", "A/B Testing", "Performance Tracking"]
-    },
-    {
       icon: <PenTool className="w-10 h-10" />,
       title: "Brand Strategy",
       description: "A comprehensive roadmap for your digital growth. We define your voice, audience, and goals.",
       features: ["Brand Identity", "Competitor Analysis", "Growth Roadmap", "Consulting"]
-    },
-    {
-      icon: <Globe className="w-10 h-10" />,
-      title: "Web Design",
-      description: "Modern, high-performance websites that turn visitors into customers. Fast, responsive, and bold.",
-      features: ["Custom Design", "SEO Optimization", "Mobile Responsive", "Conversion Focused"]
     }
   ];
 
@@ -114,7 +102,7 @@ export default function Services() {
           <div className="text-center mb-16">
             <span className="font-mono text-primary text-sm uppercase tracking-widest">Transparent Pricing</span>
             <h2 className="font-display text-5xl md:text-7xl font-bold uppercase tracking-tighter mt-4">
-              Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Weapon</span>
+              Choose Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Package</span>
             </h2>
             <p className="font-mono text-muted-foreground mt-4 max-w-2xl mx-auto">
               No hidden fees. No long-term contracts. Just results.
@@ -139,12 +127,14 @@ export default function Services() {
                 </div>
 
                 <div className="mb-8">
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-display text-5xl font-bold text-foreground">{pkg.price}</span>
-                    <span className="font-mono text-muted-foreground line-through text-lg">{pkg.originalPrice}</span>
-                  </div>
-                  <div className="mt-2 inline-block bg-secondary/10 text-secondary px-2 py-1 font-mono text-xs font-bold uppercase tracking-wide">
-                    {pkg.discount}
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-baseline gap-2 flex-wrap">
+                      <span className="font-display text-5xl font-bold text-foreground">{pkg.price}</span>
+                      <span className="font-mono text-muted-foreground line-through text-lg">{pkg.originalPrice}</span>
+                    </div>
+                    <div className="mt-2 inline-block bg-secondary/10 text-secondary px-3 py-1.5 font-mono text-xs font-bold uppercase tracking-wide rounded-md self-start">
+                      {pkg.discount}
+                    </div>
                   </div>
                 </div>
 
@@ -187,7 +177,7 @@ export default function Services() {
               Full Service <span className="text-primary">Menu</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
               <div key={index} className="group border border-border bg-background p-8 hover:border-primary transition-all duration-300 hover:-translate-y-2">
                 <div className="mb-6 text-primary group-hover:text-secondary transition-colors">
