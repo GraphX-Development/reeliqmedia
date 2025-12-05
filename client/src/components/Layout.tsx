@@ -25,11 +25,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <img 
                 src="/images/reel_iq_logo.png" 
                 alt="Reel IQ Media" 
-                className="h-10 w-auto transition-transform group-hover:scale-105" 
+                className="h-12 w-auto transition-transform group-hover:scale-105" 
               />
-              <span className="font-display text-2xl font-bold tracking-tighter uppercase hidden sm:block">
-                Reel<span className="text-primary">IQ</span>
-              </span>
             </div>
           </Link>
 
