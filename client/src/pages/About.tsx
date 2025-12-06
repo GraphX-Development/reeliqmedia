@@ -91,7 +91,7 @@ export default function About() {
                     _MG_1012 is filming. _MG_0905 is editing. _MG_0857 is writing. DSC01013 is clock. _MG_0014 is likely the one.
                 */}
                 <img 
-                  src="/images/_MG_0014.jpg" 
+                  src="/images/_MG_0932.jpg" 
                   alt="Chris and Pavel" 
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
                 />
@@ -100,7 +100,7 @@ export default function About() {
                 <h3 className="font-display text-3xl font-bold uppercase mb-2">Chris & Pavel</h3>
                 <p className="font-mono text-primary text-sm uppercase tracking-widest mb-6">Co-Founders / Lead Creatives</p>
                 <p className="font-mono text-muted-foreground max-w-2xl mx-auto mb-8">
-                  The dynamic duo behind Reel IQ Media. With a shared passion for visual storytelling and digital marketing, Chris and Pavel combined their skills to create an agency that delivers more than just views—we deliver value.
+                  The dynamic duo behind Reel IQ Media. With a shared passion for getting results on social media, Chris and Pavel combined their skills to create an agency that delivers more than just views—we deliver value.
                 </p>
               </div>
             </div>
