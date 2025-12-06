@@ -18,7 +18,7 @@ export default function Home() {
           />
         </div>
 
-        <div className="container relative z-20 px-4 flex flex-col items-start justify-center h-full pt-20">
+        <div className="container relative z-20 px-4 flex flex-col items-start justify-start h-full pt-32">
           <div className="inline-block mb-4 px-2 py-0.5 md:px-3 md:py-1 border border-primary/50 bg-primary/10 backdrop-blur-sm">
             <span className="text-primary font-mono text-[8px] md:text-sm uppercase tracking-widest">Social Media Marketing Agency</span>
           </div>
