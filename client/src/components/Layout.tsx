@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-background text-foreground font-mono selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <header className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? "top-0 px-0" : "top-6 px-4"}`}>
-        <div className={`mx-auto bg-gradient-to-b from-white/10 to-black/20 backdrop-blur-md border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] h-24 flex items-center justify-between px-10 transition-all duration-500 ease-in-out ${isScrolled ? "max-w-full rounded-none border-x-0 border-t-0" : "container max-w-[90%] rounded-full"}`}>
+        <div className={`mx-auto bg-gradient-to-b from-black/40 to-black/70 backdrop-blur-md border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] h-24 flex items-center justify-between px-10 transition-all duration-500 ease-in-out ${isScrolled ? "max-w-full rounded-none border-x-0 border-t-0" : "container max-w-[90%] rounded-full"}`}>
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
               <img 
@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span 
-                  className={`text-base font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-primary ${
+                  className={`text-lg font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-primary ${
                     location === item.path ? "text-primary" : "text-muted-foreground"
                   }`}
                   style={{ textShadow: "none" }}
