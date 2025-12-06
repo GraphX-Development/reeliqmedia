@@ -20,7 +20,8 @@ export default function Services() {
       icon: <Camera className="w-10 h-10" />,
       title: "Content Production",
       description: "Professional video production and high-end editing. We capture and polish footage that tells your story.",
-      features: ["Brand Films", "Professional Editing", "Color Grading", "Sound Design"]
+      features: ["Brand Films", "Professional Editing", "Color Grading", "Sound Design"],
+      image: "/images/_MG_1012.jpg"
     },
     {
       icon: <PenTool className="w-10 h-10" />,
@@ -179,22 +180,33 @@ export default function Services() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="group border border-border bg-background p-8 hover:border-primary transition-all duration-300 hover:-translate-y-2">
-                <div className="mb-6 text-primary group-hover:text-secondary transition-colors">
-                  {service.icon}
+              <div key={index} className="group border border-border bg-background p-0 hover:border-primary transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
+                {service.image && (
+                  <div className="w-full h-48 overflow-hidden border-b border-border">
+                    <img 
+                      src={service.image} 
+                      alt={service.title} 
+                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    />
+                  </div>
+                )}
+                <div className="p-8 flex-grow flex flex-col">
+                  <div className="mb-6 text-primary group-hover:text-secondary transition-colors">
+                    {service.icon}
+                  </div>
+                  <h3 className="font-display text-2xl font-bold uppercase mb-4">{service.title}</h3>
+                  <p className="font-mono text-muted-foreground text-sm mb-8 leading-relaxed">
+                    {service.description}
+                  </p>
+                  <ul className="space-y-2 mt-auto">
+                    {service.features.map((feature, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground/80">
+                        <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="font-display text-2xl font-bold uppercase mb-4">{service.title}</h3>
-                <p className="font-mono text-muted-foreground text-sm mb-8 leading-relaxed">
-                  {service.description}
-                </p>
-                <ul className="space-y-2">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-foreground/80">
-                      <span className="w-1.5 h-1.5 bg-primary rounded-full"></span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
               </div>
             ))}
           </div>
