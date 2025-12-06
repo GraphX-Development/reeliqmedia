@@ -122,15 +122,21 @@ export default function Portfolio() {
               We post daily. Follow us to see our latest work, behind-the-scenes content, and social media tips.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
-                Instagram
-              </Button>
-              <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-colors">
-                TikTok
-              </Button>
-              <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-foreground hover:text-background hover:border-foreground transition-colors">
-                YouTube
-              </Button>
+              <a href="https://www.instagram.com/reeliqmedia/" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
+                  Instagram
+                </Button>
+              </a>
+              <a href="https://www.tiktok.com/@reeliqmedia" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-colors">
+                  TikTok
+                </Button>
+              </a>
+              <a href="https://www.youtube.com/@ReelIQMedia" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-foreground hover:text-background hover:border-foreground transition-colors">
+                  YouTube
+                </Button>
+              </a>
             </div>
           </div>
         </div>
