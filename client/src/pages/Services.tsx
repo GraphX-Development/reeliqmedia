@@ -90,7 +90,7 @@ export default function Services() {
             Our <span className="text-secondary">Services</span>
           </h1>
           <p className="font-mono text-muted-foreground text-xl max-w-3xl border-l-4 border-primary pl-6">
-            We don't just post content; we build digital ecosystems. Explore our suite of services designed for growth.
+            We don't just create content; we take full control of the process. From building a custom strategy to ensuring you stand out, we handle everything so you can dominate social media.
           </p>
         </div>
       </section>
