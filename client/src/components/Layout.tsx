@@ -103,7 +103,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 </span>
               </div>
               <p className="text-muted-foreground max-w-md mb-6">
-                Elevating brands through bold social media marketing and cinematic content creation. We turn your vision into viral reality.
+                Making social media look easy for local businesses, we make you stand out and you learn in the process.
+              </p>
+              <p className="font-display text-primary font-bold uppercase tracking-widest mt-4 mb-6">
+                Reel. Real. Results.
               </p>
             </div>
             
@@ -125,8 +128,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <div>
               <h4 className="font-display text-lg font-bold uppercase mb-4 text-foreground">Contact</h4>
               <ul className="space-y-2 text-muted-foreground text-sm">
-                <li>info@reeliqmedia.com</li>
-                <li>(555) 123-4567</li>
+                <li>sales@reeliq.ca</li>
+                <li>+1 (204) 905-2692</li>
                 <li>Steinbach, MB</li>
               </ul>
             </div>

@@ -43,8 +43,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold uppercase mb-1">Email</h3>
-                    <p className="font-mono text-muted-foreground">info@reeliqmedia.com</p>
-                    <p className="font-mono text-muted-foreground">support@reeliqmedia.com</p>
+                    <p className="font-mono text-muted-foreground">sales@reeliq.ca</p>
                   </div>
                 </div>
                 
@@ -54,7 +53,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-display text-xl font-bold uppercase mb-1">Phone</h3>
-                    <p className="font-mono text-muted-foreground">(555) 123-4567</p>
+                    <p className="font-mono text-muted-foreground">+1 (204) 905-2692</p>
                     <p className="font-mono text-muted-foreground">Mon-Fri, 9am - 5pm CST</p>
                   </div>
                 </div>
