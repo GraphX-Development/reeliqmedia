@@ -19,26 +19,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-background text-foreground font-mono selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 h-20 flex items-center justify-between">
-          <Link href="/">
-            <div className="flex items-center gap-2 cursor-pointer group">
-              <img 
-                src="/images/reel_iq_logo.png" 
-                alt="Reel IQ Media" 
-                className="h-12 w-auto transition-transform group-hover:scale-105" 
-              />
-            </div>
-          </Link>
+        <div className="container mx-auto px-4 h-24 flex items-center justify-between">
+          <div className="flex items-center gap-12">
+            <Link href="/">
+              <div className="flex items-center gap-2 cursor-pointer group -ml-2">
+                <img 
+                  src="/images/reel_iq_logo.png" 
+                  alt="Reel IQ Media" 
+                  className="h-16 w-auto transition-transform group-hover:scale-105" 
+                />
+              </div>
+            </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link key={item.path} href={item.path}>
-                <span 
-                  className={`text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors cursor-pointer relative group ${
-                    location === item.path ? "text-primary" : "text-muted-foreground"
-                  }`}
-                >
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex items-center gap-10">
+              {navItems.map((item) => (
+                <Link key={item.path} href={item.path}>
+                  <span 
+                    className={`text-base font-bold uppercase tracking-widest hover:text-primary transition-colors cursor-pointer relative group ${
+                      location === item.path ? "text-primary" : "text-muted-foreground"
+                    }`}
+                  >
                   {item.label}
                   <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary transform origin-left transition-transform duration-300 ${
                     location === item.path ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
@@ -47,11 +48,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button variant="default" className="rounded-none font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300">
+              <Button variant="default" size="lg" className="rounded-none font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 text-base px-8">
                 Get Started
               </Button>
             </Link>
           </nav>
+          </div>
 
           {/* Mobile Menu Toggle */}
           <button 
