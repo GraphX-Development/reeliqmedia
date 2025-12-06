@@ -115,7 +115,7 @@ export default function About() {
               Proudly <span className="text-primary">Local</span>
             </h2>
             <p className="font-mono text-muted-foreground text-lg mb-8 leading-relaxed">
-              We are based in Steinbach, Manitoba, and we love our community. We understand the unique challenges of local businesses and are dedicated to helping our neighbors thrive in the digital age.
+              Based in Steinbach, we understand the local market and love helping our community grow by improving the social media playing field. We are a team of creators, strategists, and storytellers obsessed with results.
             </p>
             <Link href="/contact">
               <Button className="self-start rounded-none px-8 py-6 font-bold uppercase tracking-widest">
@@ -127,7 +127,7 @@ export default function About() {
             <img 
               src="/images/DSC01013.jpg" 
               alt="Steinbach Clock Tower" 
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-700 object-[50%_30%]"
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700 object-right"
             />
           </div>
         </div>
