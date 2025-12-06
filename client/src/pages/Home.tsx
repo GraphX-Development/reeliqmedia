@@ -19,8 +19,8 @@ export default function Home() {
         </div>
 
         <div className="container relative z-20 px-4 flex flex-col items-start justify-center h-full pt-20">
-          <div className="inline-block mb-4 px-3 py-1 border border-primary/50 bg-primary/10 backdrop-blur-sm">
-            <span className="text-primary font-mono text-sm uppercase tracking-widest">Social Media Marketing Agency</span>
+          <div className="inline-block mb-4 px-2 py-0.5 md:px-3 md:py-1 border border-primary/50 bg-primary/10 backdrop-blur-sm">
+            <span className="text-primary font-mono text-[8px] md:text-sm uppercase tracking-widest">Social Media Marketing Agency</span>
           </div>
           
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.85] tracking-tighter text-foreground mb-6 max-w-5xl">
