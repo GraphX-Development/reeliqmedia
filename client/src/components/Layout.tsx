@@ -1,11 +1,20 @@
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navItems = [
     { label: "Home", path: "/" },
@@ -18,8 +27,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-mono selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
-      <header className="fixed top-6 left-0 right-0 z-50 px-4">
-        <div className="container mx-auto max-w-6xl bg-gradient-to-b from-white/10 to-black/20 backdrop-blur-md border border-white/20 rounded-full shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] h-20 flex items-center justify-between px-8">
+      <header className={`fixed left-0 right-0 z-50 transition-all duration-500 ease-in-out ${isScrolled ? "top-0 px-0" : "top-6 px-4"}`}>
+        <div className={`mx-auto bg-gradient-to-b from-white/10 to-black/20 backdrop-blur-md border border-white/20 shadow-[0_20px_50px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] h-20 flex items-center justify-between px-8 transition-all duration-500 ease-in-out ${isScrolled ? "max-w-full rounded-none border-x-0 border-t-0" : "container max-w-6xl rounded-full"}`}>
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
               <img 

@@ -34,7 +34,7 @@ export default function Portfolio() {
   return (
     <div className="flex flex-col w-full">
       {/* Header */}
-      <section className="py-20 bg-background border-b border-border">
+      <section className="pt-32 pb-20 bg-background border-b border-border">
         <div className="container px-4">
           <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-6">
             Our <span className="text-primary">Work</span>
