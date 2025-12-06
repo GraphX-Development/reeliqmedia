@@ -129,7 +129,7 @@ export default function Home() {
             <img 
               src="/images/DSC01013.jpg" 
               alt="Local landmark" 
-              className="absolute inset-0 w-full h-full object-cover object-left transition-all duration-700"
+              className="absolute inset-0 w-full h-full object-cover object-right transition-all duration-700"
             />
           </div>
           <div className="p-12 lg:p-24 flex flex-col justify-center">

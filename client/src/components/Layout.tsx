@@ -106,11 +106,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center gap-3 mb-4">
-                <img src="/images/reel_iq_lamp_icon.png" alt="Reel IQ Media" className="h-10 w-auto" />
-                <span className="font-display text-xl font-bold tracking-tighter uppercase">
-                  Reel<span className="text-primary">IQ</span>
-                </span>
+              <div className="flex items-center gap-3 mb-6">
+                <img src="/images/reel_iq_media(1).png" alt="Reel IQ Media" className="h-12 w-auto" />
               </div>
               <p className="text-muted-foreground max-w-md mb-6">
                 Making social media look easy for local businesses, we make you stand out and you learn in the process.
