@@ -6,7 +6,7 @@ export default function About() {
   return (
     <div className="flex flex-col w-full">
       {/* Header */}
-      <section className="pt-32 pb-20 bg-card border-b border-border">
+      <section className="pt-24 md:pt-32 pb-20 bg-card border-b border-border">
         <div className="container px-4">
           <h1 className="font-display text-6xl md:text-8xl font-bold uppercase tracking-tighter mb-6">
             About <span className="text-primary">Us</span>
