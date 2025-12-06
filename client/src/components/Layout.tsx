@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <img 
                 src="/images/reel_iq_media_main.png" 
                 alt="Reel IQ Media" 
-                className="h-14 w-auto transition-transform group-hover:scale-105" 
+                className="h-12 w-auto transition-transform group-hover:scale-105" 
               />
             </div>
           </Link>
@@ -47,9 +47,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                   className={`text-base font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-primary ${
                     location === item.path ? "text-primary" : "text-muted-foreground"
                   }`}
-                  style={{ 
-                    textShadow: "0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3), 1px 0 2px rgba(0,0,0,0.2)" 
-                  }}
+                  style={{ textShadow: "none" }}
                 >
                   {item.label}
                   <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary transform origin-left transition-transform duration-300 ${
@@ -108,8 +106,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div className="col-span-1 md:col-span-2">
-              <div className="flex items-center gap-2 mb-4">
-                <img src="/images/reel_iq_logo.png" alt="Reel IQ Media" className="h-8 w-auto" />
+              <div className="flex items-center gap-3 mb-4">
+                <img src="/images/reel_iq_lamp_icon.png" alt="Reel IQ Media" className="h-10 w-auto" />
                 <span className="font-display text-xl font-bold tracking-tighter uppercase">
                   Reel<span className="text-primary">IQ</span>
                 </span>
