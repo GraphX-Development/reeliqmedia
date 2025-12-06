@@ -9,8 +9,17 @@ export default function Contact() {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data: any) => {
+<<<<<<< HEAD
     console.log(data);
     toast.success("Message sent! We'll get back to you shortly.");
+=======
+    const subject = encodeURIComponent(data.subject || "New Inquiry from Website");
+    const body = encodeURIComponent(
+      `Name: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
+    );
+    window.location.href = `mailto:sales@reeliq.ca?subject=${subject}&body=${body}`;
+    toast.success("Opening your email client...");
+>>>>>>> 26e1edf01b3d55d173d43844fa26280e410552f8
     reset();
   };
 
