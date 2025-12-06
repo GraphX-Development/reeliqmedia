@@ -9,7 +9,6 @@ export default function Home() {
       <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-border">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-background/80 z-10 mix-blend-multiply"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
           <img 
             src="/images/_MG_1012.jpg" 

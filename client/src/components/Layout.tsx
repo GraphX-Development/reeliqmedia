@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-background text-foreground font-mono selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <header className="fixed top-6 left-0 right-0 z-50 px-4">
-        <div className="container mx-auto max-w-6xl bg-background/80 backdrop-blur-md border border-border/50 rounded-full shadow-2xl h-20 flex items-center justify-between px-8">
+        <div className="container mx-auto max-w-6xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-full shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] h-20 flex items-center justify-between px-8">
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
               <img 
