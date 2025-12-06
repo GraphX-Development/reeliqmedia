@@ -19,8 +19,8 @@ export default function Services() {
     {
       icon: <Camera className="w-10 h-10" />,
       title: "Content Production",
-      description: "High-quality photography and videography for your website, ads, and marketing materials.",
-      features: ["Product Photography", "Brand Films", "Event Coverage", "Drone Footage"]
+      description: "Professional video production and high-end editing. We capture and polish footage that tells your story.",
+      features: ["Brand Films", "Professional Editing", "Color Grading", "Sound Design"]
     },
     {
       icon: <PenTool className="w-10 h-10" />,
