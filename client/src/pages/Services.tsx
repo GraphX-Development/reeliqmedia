@@ -255,7 +255,7 @@ export default function Services() {
             Ready to get started?
           </h2>
           <Link href="/contact">
-            <Button size="lg" variant="secondary" className="rounded-none text-xl px-12 py-8 font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all">
+            <Button size="lg" variant="secondary" className="rounded-none text-lg md:text-xl px-8 py-6 md:px-12 md:py-8 font-bold uppercase tracking-widest shadow-lg hover:shadow-xl transition-all">
               Book A Consultation
             </Button>
           </Link>

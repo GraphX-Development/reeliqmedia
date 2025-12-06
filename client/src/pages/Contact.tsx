@@ -152,7 +152,7 @@ export default function Contact() {
                   type="submit" 
                   size="lg" 
                   disabled={isSubmitting}
-                  className="w-full rounded-none font-bold uppercase tracking-widest text-lg h-14 hover:bg-secondary hover:text-secondary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full rounded-none font-bold uppercase tracking-widest text-sm md:text-lg h-12 md:h-14 hover:bg-secondary hover:text-secondary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>

@@ -34,13 +34,13 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/contact">
-              <Button size="lg" className="rounded-none text-lg px-8 py-6 font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 group">
+              <Button size="lg" className="rounded-none text-sm md:text-lg px-6 py-4 md:px-8 md:py-6 font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 group">
                 Start Your Project
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link href="/portfolio">
-              <Button variant="outline" size="lg" className="rounded-none text-lg px-8 py-6 font-bold uppercase tracking-widest border-2 hover:bg-foreground hover:text-background transition-all duration-300">
+              <Button variant="outline" size="lg" className="rounded-none text-sm md:text-lg px-6 py-4 md:px-8 md:py-6 font-bold uppercase tracking-widest border-2 hover:bg-foreground hover:text-background transition-all duration-300">
                 View Our Work
               </Button>
             </Link>
@@ -133,7 +133,7 @@ export default function Home() {
             />
           </div>
           <div className="p-12 lg:p-24 flex flex-col justify-center">
-            <span className="font-mono text-primary text-sm uppercase tracking-widest mb-4">Who We Are</span>
+            <span className="font-mono tetext-[10px] md:text-sm uppercase tracking-widest mb-4">Who We Are</span>
             <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-8">
               Local Roots, <br/>
               <span className="text-secondary">Global Vision</span>
@@ -161,7 +161,7 @@ export default function Home() {
             Stop blending in. Start standing out. Let's create something extraordinary together.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="rounded-none text-xl px-12 py-8 font-bold uppercase tracking-widest bg-foreground text-background hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+            <Button size="lg" className="rounded-none text-lg md:text-xl px-8 py-6 md:px-12 md:py-8 font-bold uppercase tracking-widest bg-foreground text-background hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
               Get A Quote
             </Button>
           </Link>

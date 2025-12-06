@@ -73,7 +73,7 @@ export default function Portfolio() {
               </p>
               <div className="flex gap-4">
                 <a href={`https://youtube.com/shorts/${featuredVideo.embedId}`} target="_blank" rel="noopener noreferrer">
-                  <Button size="lg" className="rounded-none font-bold uppercase tracking-widest">
+                  <Button size="lg" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest">
                     Watch on YouTube <ExternalLink className="ml-2 w-4 h-4" />
                   </Button>
                 </a>
@@ -123,17 +123,17 @@ export default function Portfolio() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a href="https://www.instagram.com/reeliqmedia/" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
+                <Button variant="outline" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
                   Instagram
                 </Button>
               </a>
               <a href="https://www.tiktok.com/@reeliqmedia" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-colors">
+                <Button variant="outline" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-colors">
                   TikTok
                 </Button>
               </a>
               <a href="https://www.youtube.com/@ReelIQMedia" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-none font-bold uppercase tracking-widest hover:bg-foreground hover:text-background hover:border-foreground transition-colors">
+                <Button variant="outline" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest hover:bg-foreground hover:text-background hover:border-foreground transition-colors">
                   YouTube
                 </Button>
               </a>

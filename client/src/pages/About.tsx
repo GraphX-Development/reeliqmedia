@@ -118,7 +118,7 @@ export default function About() {
               Based in Steinbach, we understand the local market and love helping our community grow by improving the social media playing field. We are a team of creators, strategists, and storytellers obsessed with results.
             </p>
             <Link href="/contact">
-              <Button className="self-start rounded-none px-8 py-6 font-bold uppercase tracking-widest">
+              <Button className="self-start rounded-none px-6 py-4 md:px-8 md:py-6 font-bold uppercase tracking-widest">
                 Work With Us
               </Button>
             </Link>
