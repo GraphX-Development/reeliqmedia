@@ -79,7 +79,6 @@ export default function About() {
           <div className="max-w-4xl mx-auto">
             <div className="group relative border border-border bg-background p-4 hover:border-primary transition-all duration-300">
               <div className="aspect-video overflow-hidden mb-8 relative">
-                <div className="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors z-10"></div>
                 {/* Placeholder for the "two dudes" pic mentioned by user, assuming it's one of the provided images or will be added later. 
                     Based on file list, I'll use a generic placeholder or one of the provided ones if it fits. 
                     The user mentioned "pic with two dudes in about us its chris and pavel". 

@@ -126,7 +126,6 @@ export default function Home() {
       <section className="py-0 bg-card border-b border-border">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="relative min-h-[500px] lg:h-auto border-b lg:border-b-0 lg:border-r border-border group overflow-hidden">
-            <div className="absolute inset-0 bg-primary/10 z-10 group-hover:bg-transparent transition-colors duration-500"></div>
             <img 
               src="/images/DSC01013.jpg" 
               alt="Local landmark" 
