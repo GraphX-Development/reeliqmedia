@@ -18,28 +18,27 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground font-mono selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4 h-24 flex items-center justify-between">
-          <div className="flex items-center gap-12">
-            <Link href="/">
-              <div className="flex items-center gap-2 cursor-pointer group -ml-2">
-                <img 
-                  src="/images/reel_iq_logo.png" 
-                  alt="Reel IQ Media" 
-                  className="h-16 w-auto transition-transform group-hover:scale-105" 
-                />
-              </div>
-            </Link>
+      <header className="fixed top-6 left-0 right-0 z-50 px-4">
+        <div className="container mx-auto max-w-6xl bg-background/80 backdrop-blur-md border border-border/50 rounded-full shadow-2xl h-20 flex items-center justify-between px-8">
+          <Link href="/">
+            <div className="flex items-center gap-2 cursor-pointer group">
+              <img 
+                src="/images/reel_iq_logo.png" 
+                alt="Reel IQ Media" 
+                className="h-12 w-auto transition-transform group-hover:scale-105" 
+              />
+            </div>
+          </Link>
 
-            {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-10">
-              {navItems.map((item) => (
-                <Link key={item.path} href={item.path}>
-                  <span 
-                    className={`text-base font-bold uppercase tracking-widest hover:text-primary transition-colors cursor-pointer relative group ${
-                      location === item.path ? "text-primary" : "text-muted-foreground"
-                    }`}
-                  >
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex items-center gap-8">
+            {navItems.map((item) => (
+              <Link key={item.path} href={item.path}>
+                <span 
+                  className={`text-sm font-bold uppercase tracking-widest hover:text-primary transition-colors cursor-pointer relative group ${
+                    location === item.path ? "text-primary" : "text-muted-foreground"
+                  }`}
+                >
                   {item.label}
                   <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary transform origin-left transition-transform duration-300 ${
                     location === item.path ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
@@ -48,12 +47,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button variant="default" size="lg" className="rounded-none font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 text-base px-8">
+              <Button variant="default" className="rounded-full font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 px-6">
                 Get Started
               </Button>
             </Link>
           </nav>
-          </div>
 
           {/* Mobile Menu Toggle */}
           <button 
@@ -66,7 +64,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Nav */}
         {isMenuOpen && (
-          <div className="md:hidden absolute top-20 left-0 right-0 bg-background border-b border-border p-4 flex flex-col gap-4 animate-in slide-in-from-top-5">
+          <div className="md:hidden absolute top-24 left-4 right-4 bg-background/95 backdrop-blur-md border border-border rounded-2xl p-6 flex flex-col gap-4 animate-in slide-in-from-top-5 shadow-2xl">
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span 
@@ -80,7 +78,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button className="w-full rounded-none font-bold uppercase tracking-widest mt-2" onClick={() => setIsMenuOpen(false)}>
+              <Button className="w-full rounded-full font-bold uppercase tracking-widest mt-2" onClick={() => setIsMenuOpen(false)}>
                 Get Started
               </Button>
             </Link>
