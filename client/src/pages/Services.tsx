@@ -20,8 +20,7 @@ export default function Services() {
       icon: <Camera className="w-10 h-10" />,
       title: "Content Production",
       description: "Professional video production and high-end editing. We capture and polish footage that tells your story.",
-      features: ["Brand Films", "Professional Editing", "Color Grading", "Sound Design"],
-      image: "/images/_MG_1012.jpg"
+      features: ["Brand Films", "Professional Editing", "Color Grading", "Sound Design"]
     },
     {
       icon: <PenTool className="w-10 h-10" />,
@@ -180,17 +179,8 @@ export default function Services() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
             {services.map((service, index) => (
-              <div key={index} className="group border border-border bg-background p-0 hover:border-primary transition-all duration-300 hover:-translate-y-2 overflow-hidden flex flex-col">
-                {service.image && (
-                  <div className="w-full h-48 overflow-hidden border-b border-border">
-                    <img 
-                      src={service.image} 
-                      alt={service.title} 
-                      className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
-                    />
-                  </div>
-                )}
-                <div className="p-8 flex-grow flex flex-col">
+              <div key={index} className="group border border-border bg-background p-8 hover:border-primary transition-all duration-300 hover:-translate-y-2 flex flex-col">
+                <div className="flex-grow flex flex-col">
                   <div className="mb-6 text-primary group-hover:text-secondary transition-colors">
                     {service.icon}
                   </div>

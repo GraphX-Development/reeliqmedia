@@ -78,7 +78,7 @@ export default function Home() {
                 icon: <Video className="w-12 h-12 text-primary mb-6" />,
                 title: "Content Creation",
                 desc: "High-quality reels, tiktoks, and promotional videos filmed with professional gear.",
-                image: "/images/_MG_0014.jpg"
+                image: "/images/_MG_1012.jpg"
               },
               {
                 icon: <TrendingUp className="w-12 h-12 text-secondary mb-6" />,
