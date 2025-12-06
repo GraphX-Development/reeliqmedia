@@ -93,7 +93,7 @@ export default function About() {
                 <img 
                   src="/images/_MG_0932.jpg" 
                   alt="Chris and Pavel" 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                  className="w-full h-full object-cover transition-all duration-500"
                 />
               </div>
               <div className="text-center">
@@ -128,7 +128,7 @@ export default function About() {
             <img 
               src="/images/DSC01013.jpg" 
               alt="Steinbach Clock Tower" 
-              className="absolute inset-0 w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
             />
           </div>
         </div>

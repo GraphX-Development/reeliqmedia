@@ -130,7 +130,7 @@ export default function Home() {
             <img 
               src="/images/DSC01013.jpg" 
               alt="Local landmark" 
-              className="absolute inset-0 w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
             />
           </div>
           <div className="p-12 lg:p-24 flex flex-col justify-center">
