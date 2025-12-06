@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <img 
                 src="/images/reel_iq_media_main.png" 
                 alt="Reel IQ Media" 
-                className="h-16 w-auto transition-transform group-hover:scale-105" 
+                className="h-14 w-auto transition-transform group-hover:scale-105" 
               />
             </div>
           </Link>
@@ -44,10 +44,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span 
-                  className={`text-base font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-primary hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.5)] ${
+                  className={`text-base font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-white ${
                     location === item.path ? "text-primary" : "text-muted-foreground"
                   }`}
-                  style={{ textShadow: "0 0 0 rgba(0,0,0,0)" }}
+                  style={{ 
+                    textShadow: "0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3), 1px 0 2px rgba(0,0,0,0.2)" 
+                  }}
                 >
                   {item.label}
                   <span className={`absolute -bottom-1 left-0 w-full h-0.5 bg-primary transform origin-left transition-transform duration-300 ${
