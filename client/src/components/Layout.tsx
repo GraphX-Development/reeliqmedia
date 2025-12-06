@@ -32,9 +32,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
               <img 
-                src="/images/reel_iq_logo.png" 
+                src="/images/reel_iq_media_main.png" 
                 alt="Reel IQ Media" 
-                className="h-12 w-auto transition-transform group-hover:scale-105" 
+                className="h-24 w-auto transition-transform group-hover:scale-105" style={{width: 'auto', height: '96px'}} 
               />
             </div>
           </Link>

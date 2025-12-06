@@ -127,7 +127,7 @@ export default function About() {
             <img 
               src="/images/DSC01013.jpg" 
               alt="Steinbach Clock Tower" 
-              className="absolute inset-0 w-full h-full object-cover transition-all duration-700"
+              className="absolute inset-0 w-full h-full object-cover transition-all duration-700 object-[50%_30%]"
             />
           </div>
         </div>
