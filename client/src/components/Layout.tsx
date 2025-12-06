@@ -44,7 +44,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span 
-                  className={`text-base font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-white ${
+                  className={`text-base font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer relative group inline-block hover:scale-110 hover:text-primary ${
                     location === item.path ? "text-primary" : "text-muted-foreground"
                   }`}
                   style={{ 
