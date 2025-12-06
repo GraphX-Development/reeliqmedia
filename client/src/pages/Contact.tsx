@@ -4,18 +4,48 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
 
 export default function Contact() {
   const { register, handleSubmit, reset } = useForm();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const onSubmit = (data: any) => {
-    const subject = encodeURIComponent(data.subject || "New Inquiry from Website");
-    const body = encodeURIComponent(
-      `Name: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\n\nMessage:\n${data.message}`
-    );
-    window.location.href = `mailto:sales@reeliq.ca?subject=${subject}&body=${body}`;
-    toast.success("Opening your email client...");
-    reset();
+  const onSubmit = async (data: any) => {
+    setIsSubmitting(true);
+    
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    if (!serviceId || !templateId || !publicKey) {
+      toast.error("EmailJS configuration is missing. Please check your environment variables.");
+      setIsSubmitting(false);
+      return;
+    }
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+        },
+        publicKey
+      );
+      
+      toast.success("Message sent successfully! We'll get back to you shortly.");
+      reset();
+    } catch (error) {
+      console.error("EmailJS Error:", error);
+      toast.error("Failed to send message. Please try again later or contact us directly via email.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -95,31 +125,36 @@ export default function Contact() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="font-mono text-xs uppercase tracking-widest font-bold text-muted-foreground">First Name</label>
-                    <Input {...register("firstName")} className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="JANE" />
+                    <Input {...register("firstName", { required: true })} className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="JANE" />
                   </div>
                   <div className="space-y-2">
                     <label className="font-mono text-xs uppercase tracking-widest font-bold text-muted-foreground">Last Name</label>
-                    <Input {...register("lastName")} className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="DOE" />
+                    <Input {...register("lastName", { required: true })} className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="DOE" />
                   </div>
                 </div>
                 
                 <div className="space-y-2">
                   <label className="font-mono text-xs uppercase tracking-widest font-bold text-muted-foreground">Email Address</label>
-                  <Input {...register("email")} type="email" className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="JANE@EXAMPLE.COM" />
+                  <Input {...register("email", { required: true, pattern: /^\S+@\S+$/i })} type="email" className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="JANE@EXAMPLE.COM" />
                 </div>
                 
                 <div className="space-y-2">
                   <label className="font-mono text-xs uppercase tracking-widest font-bold text-muted-foreground">Subject</label>
-                  <Input {...register("subject")} className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="PROJECT INQUIRY" />
+                  <Input {...register("subject", { required: true })} className="rounded-none border-border bg-card focus:border-primary h-12" placeholder="PROJECT INQUIRY" />
                 </div>
                 
                 <div className="space-y-2">
                   <label className="font-mono text-xs uppercase tracking-widest font-bold text-muted-foreground">Message</label>
-                  <Textarea {...register("message")} className="rounded-none border-border bg-card focus:border-primary min-h-[150px] resize-none" placeholder="TELL US ABOUT YOUR PROJECT..." />
+                  <Textarea {...register("message", { required: true })} className="rounded-none border-border bg-card focus:border-primary min-h-[150px] resize-none" placeholder="TELL US ABOUT YOUR PROJECT..." />
                 </div>
                 
-                <Button type="submit" size="lg" className="w-full rounded-none font-bold uppercase tracking-widest text-lg h-14 hover:bg-secondary hover:text-secondary-foreground transition-colors">
-                  Send Message
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  disabled={isSubmitting}
+                  className="w-full rounded-none font-bold uppercase tracking-widest text-lg h-14 hover:bg-secondary hover:text-secondary-foreground transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
