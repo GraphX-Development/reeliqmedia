@@ -34,7 +34,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               <img 
                 src="/images/reel_iq_media_main.png" 
                 alt="Reel IQ Media" 
-                className="h-12 md:h-16 w-auto transition-transform group-hover:scale-105" style={{width: 'auto'}} 
+                className="h-8 md:h-16 w-auto transition-transform group-hover:scale-105" 
               />
             </div>
           </Link>
