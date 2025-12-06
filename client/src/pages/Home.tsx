@@ -142,7 +142,7 @@ export default function Home() {
             <p className="font-mono text-muted-foreground text-lg mb-8 leading-relaxed">
               Based in Steinbach, we understand the local market while bringing world-class production quality to your brand. We are a team of creators, strategists, and storytellers obsessed with results.
             </p>
-            <Link href="/about">
+            <Link href="/about#team">
               <Button variant="outline" className="self-start rounded-none border-2 px-8 py-6 font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all">
                 Meet The Team
               </Button>

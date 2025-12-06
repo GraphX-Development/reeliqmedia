@@ -67,7 +67,7 @@ export default function About() {
       </section>
 
       {/* Team Section */}
-      <section className="py-24 bg-card border-b border-border">
+      <section id="team" className="py-24 bg-card border-b border-border">
         <div className="container px-4">
           <div className="text-center mb-16">
             <span className="font-mono text-primary text-sm uppercase tracking-widest">The Minds Behind The Lens</span>
