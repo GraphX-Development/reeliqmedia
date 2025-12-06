@@ -119,7 +119,7 @@ export default function Portfolio() {
           <div className="mt-24 text-center bg-card border border-border p-12">
             <h3 className="font-display text-3xl font-bold uppercase mb-6">See Our Full Feed</h3>
             <p className="font-mono text-muted-foreground mb-8 max-w-xl mx-auto">
-              We post daily. Follow us to see our latest work, behind-the-scenes content, and social media tips.
+              We post weekly. Follow us to see our latest work, behind-the-scenes content, and social media tips.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a href="https://www.instagram.com/reeliqmedia/" target="_blank" rel="noopener noreferrer">
