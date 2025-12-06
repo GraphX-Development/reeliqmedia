@@ -6,9 +6,10 @@ export default function Home() {
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden border-b border-border">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden border-b border-border">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-black/60 z-10"></div>
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent z-10"></div>
           <img 
             src="/images/_MG_1012.jpg" 

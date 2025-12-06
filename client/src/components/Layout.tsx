@@ -19,7 +19,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col bg-background text-foreground font-mono selection:bg-primary selection:text-primary-foreground">
       {/* Navigation */}
       <header className="fixed top-6 left-0 right-0 z-50 px-4">
-        <div className="container mx-auto max-w-6xl bg-white/10 backdrop-blur-xl border border-white/20 rounded-full shadow-[0_8px_32px_0_rgba(31,38,135,0.37)] h-20 flex items-center justify-between px-8">
+        <div className="container mx-auto max-w-6xl bg-zinc-900/30 backdrop-blur-3xl border border-white/10 rounded-full shadow-2xl h-20 flex items-center justify-between px-8 supports-[backdrop-filter]:bg-zinc-900/10">
           <Link href="/">
             <div className="flex items-center gap-2 cursor-pointer group">
               <img 
@@ -87,7 +87,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
         {children}
       </main>
 
