@@ -95,11 +95,11 @@ export default function Home() {
             ].map((service, index) => (
               <div key={index} className="group relative border border-border bg-card hover:border-primary transition-colors duration-300 h-full flex flex-col">
                 <div className="h-48 overflow-hidden relative">
-                  <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10"></div>
+                  
                   <img 
                     src={service.image} 
                     alt={service.title} 
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110"
+                    className="w-full h-full object-cover transition-all duration-500 transform group-hover:scale-110"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">

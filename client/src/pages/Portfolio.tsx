@@ -93,17 +93,17 @@ export default function Portfolio() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
               <div key={index} className="group relative aspect-video overflow-hidden border border-border bg-card cursor-pointer">
-                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-8">
-                  <span className="font-mono text-primary text-xs uppercase tracking-widest mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-8">
+                  <span className="font-mono text-primary text-xs uppercase tracking-widest mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
                     {project.category}
                   </span>
-                  <h3 className="font-display text-2xl font-bold uppercase text-white mb-4 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                  <h3 className="font-display text-2xl font-bold uppercase text-white mb-4 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-100">
                     {project.title}
                   </h3>
-                  <p className="font-mono text-gray-300 text-xs max-w-xs mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
+                  <p className="font-mono text-gray-300 text-xs max-w-xs mb-6 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
                     {project.desc}
                   </p>
-                  <Button variant="outline" className="rounded-full w-12 h-12 p-0 border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 translate-y-4 group-hover:translate-y-0 delay-200">
+                  <Button variant="outline" className="rounded-full w-12 h-12 p-0 border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 delay-200">
                     <Play className="w-5 h-5 ml-1" />
                   </Button>
                 </div>
