@@ -14,31 +14,31 @@ export default function Portfolio() {
     {
       title: "Meditinc Series",
       category: "Educational Reels",
-      video: "/videos/Reel2WaterproofnessandDepthCapability.mp4",
+      video: "/videos/Reel2_comp.mp4",
       desc: "Simplifying complex medical topics through engaging visual storytelling."
     },
     {
       title: "Meditinc Inspection",
       category: "Product Demo",
-      video: "/videos/Reel4Inspection.mp4",
+      video: "/videos/Reel4_comp.mp4",
       desc: "Detailed inspection workflow showcasing product capabilities."
     },
     {
       title: "Meditinc Lighting",
       category: "Feature Highlight",
-      video: "/videos/Reel3LightingandViewing.mp4",
+      video: "/videos/Reel3_comp.mp4",
       desc: "Demonstrating advanced lighting and viewing features."
     },
     {
       title: "Repix Handyman",
       category: "Service Promo",
-      video: "/videos/RepixShort2.mp4",
+      video: "/videos/Repix2_comp.mp4",
       desc: "Showcasing professional handyman services with dynamic editing."
     },
     {
       title: "Repix Services",
       category: "Brand Story",
-      video: "/videos/RepixShort3.mp4",
+      video: "/videos/Repix3_comp.mp4",
       desc: "Building trust through authentic service demonstration."
     },
     {
