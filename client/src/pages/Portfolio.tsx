@@ -1,6 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { Play, ExternalLink } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export default function Portfolio() {
   const featuredVideo = {
@@ -105,36 +112,8 @@ export default function Portfolio() {
             Meditinc Series
           </h3>
           
-          {/* Meditinc Shorts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {meditincShorts.map((project, index) => (
-              <div key={index} className="group relative aspect-[9/16] overflow-hidden border border-border bg-card cursor-pointer grayscale hover:grayscale-0 transition-all duration-500">
-                <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-8">
-                  <span className="font-mono text-primary text-xs uppercase tracking-widest mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                    {project.category}
-                  </span>
-                  <h3 className="font-display text-xl font-bold uppercase text-white mb-4 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                    {project.title}
-                  </h3>
-                  <p className="font-mono text-gray-300 text-[10px] max-w-xs mb-6 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
-                    {project.desc}
-                  </p>
-                </div>
-                <video 
-                  src={project.video} 
-                  className="w-full h-full object-cover transition-all duration-700"
-                  muted
-                  loop
-                  playsInline
-                  onMouseOver={(e) => e.currentTarget.play()}
-                  onMouseOut={(e) => e.currentTarget.pause()}
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Meditinc YouTube Video */}
-          <div className="max-w-4xl mx-auto">
+          {/* Meditinc YouTube Video (Main) */}
+          <div className="max-w-4xl mx-auto mb-16">
             <div className="relative aspect-video w-full border-4 border-border rounded-xl overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-500">
               <iframe 
                 className="w-full h-full"
@@ -150,6 +129,48 @@ export default function Portfolio() {
               <p className="font-mono text-muted-foreground text-sm">Comprehensive product overview and demonstration.</p>
             </div>
           </div>
+
+          {/* Meditinc Shorts Carousel */}
+          <div className="max-w-5xl mx-auto px-12">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {meditincShorts.map((project, index) => (
+                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="group relative aspect-[9/16] overflow-hidden border border-border bg-card cursor-pointer grayscale hover:grayscale-0 transition-all duration-500 rounded-xl">
+                      <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-4">
+                        <span className="font-mono text-primary text-[10px] uppercase tracking-widest mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                          {project.category}
+                        </span>
+                        <h3 className="font-display text-lg font-bold uppercase text-white mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                          {project.title}
+                        </h3>
+                        <p className="font-mono text-gray-300 text-[8px] max-w-xs mb-4 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
+                          {project.desc}
+                        </p>
+                      </div>
+                      <video 
+                        src={project.video} 
+                        className="w-full h-full object-cover transition-all duration-700"
+                        muted
+                        loop
+                        playsInline
+                        onMouseOver={(e) => e.currentTarget.play()}
+                        onMouseOut={(e) => e.currentTarget.pause()}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
+          </div>
         </div>
       </section>
 
@@ -160,7 +181,7 @@ export default function Portfolio() {
             Repix Handyman Services
           </h3>
 
-          {/* Repix Website Video */}
+          {/* Repix Website Video (Main) */}
           <div className="max-w-4xl mx-auto mb-16">
             <div className="relative aspect-video w-full border-4 border-border rounded-xl overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-500">
               <iframe 
@@ -178,32 +199,46 @@ export default function Portfolio() {
             </div>
           </div>
 
-          {/* Repix Shorts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-            {repixShorts.map((project, index) => (
-              <div key={index} className="group relative aspect-[9/16] overflow-hidden border border-border bg-card cursor-pointer grayscale hover:grayscale-0 transition-all duration-500">
-                <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-8">
-                  <span className="font-mono text-primary text-xs uppercase tracking-widest mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                    {project.category}
-                  </span>
-                  <h3 className="font-display text-xl font-bold uppercase text-white mb-4 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                    {project.title}
-                  </h3>
-                  <p className="font-mono text-gray-300 text-[10px] max-w-xs mb-6 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
-                    {project.desc}
-                  </p>
-                </div>
-                <video 
-                  src={project.video} 
-                  className="w-full h-full object-cover transition-all duration-700"
-                  muted
-                  loop
-                  playsInline
-                  onMouseOver={(e) => e.currentTarget.play()}
-                  onMouseOut={(e) => e.currentTarget.pause()}
-                />
-              </div>
-            ))}
+          {/* Repix Shorts Carousel */}
+          <div className="max-w-5xl mx-auto px-12">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              className="w-full"
+            >
+              <CarouselContent className="-ml-4">
+                {repixShorts.map((project, index) => (
+                  <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                    <div className="group relative aspect-[9/16] overflow-hidden border border-border bg-card cursor-pointer grayscale hover:grayscale-0 transition-all duration-500 rounded-xl">
+                      <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-4">
+                        <span className="font-mono text-primary text-[10px] uppercase tracking-widest mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                          {project.category}
+                        </span>
+                        <h3 className="font-display text-lg font-bold uppercase text-white mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                          {project.title}
+                        </h3>
+                        <p className="font-mono text-gray-300 text-[8px] max-w-xs mb-4 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
+                          {project.desc}
+                        </p>
+                      </div>
+                      <video 
+                        src={project.video} 
+                        className="w-full h-full object-cover transition-all duration-700"
+                        muted
+                        loop
+                        playsInline
+                        onMouseOver={(e) => e.currentTarget.play()}
+                        onMouseOut={(e) => e.currentTarget.pause()}
+                      />
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           </div>
         </div>
       </section>
