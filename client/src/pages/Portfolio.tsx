@@ -14,20 +14,38 @@ export default function Portfolio() {
     {
       title: "Meditinc Series",
       category: "Educational Reels",
-      image: "/images/_MG_0905.jpg", 
+      video: "/videos/Reel2WaterproofnessandDepthCapability.mp4",
       desc: "Simplifying complex medical topics through engaging visual storytelling."
     },
     {
-      title: "Local Eats Campaign",
-      category: "Brand Storytelling",
-      image: "/images/DSC01013.jpg", 
-      desc: "Highlighting the best local flavors with cinematic b-roll and sound design."
+      title: "Meditinc Inspection",
+      category: "Product Demo",
+      video: "/videos/Reel4Inspection.mp4",
+      desc: "Detailed inspection workflow showcasing product capabilities."
     },
     {
-      title: "Tech Reviews",
+      title: "Meditinc Lighting",
+      category: "Feature Highlight",
+      video: "/videos/Reel3LightingandViewing.mp4",
+      desc: "Demonstrating advanced lighting and viewing features."
+    },
+    {
+      title: "Repix Handyman",
+      category: "Service Promo",
+      video: "/videos/RepixShort2.mp4",
+      desc: "Showcasing professional handyman services with dynamic editing."
+    },
+    {
+      title: "Repix Services",
+      category: "Brand Story",
+      video: "/videos/RepixShort3.mp4",
+      desc: "Building trust through authentic service demonstration."
+    },
+    {
+      title: "Meditinc Full Overview",
       category: "Long-Form Content",
-      image: "/images/_MG_0014.jpg", 
-      desc: "In-depth product reviews with professional lighting and crisp audio."
+      video: "/videos/MainVideo_withInspectionFootage.mp4",
+      desc: "Comprehensive product overview and demonstration."
     }
   ];
 
@@ -50,11 +68,11 @@ export default function Portfolio() {
         <div className="container px-4">
           <div className="flex flex-col lg:flex-row gap-12 items-center">
             <div className="lg:w-1/2 w-full">
-              <div className="relative aspect-[9/16] max-w-sm mx-auto lg:mx-0 border-4 border-border rounded-3xl overflow-hidden shadow-2xl">
+              <div className="relative aspect-video max-w-full mx-auto lg:mx-0 border-4 border-border rounded-3xl overflow-hidden shadow-2xl">
                 <iframe 
                   className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${featuredVideo.embedId}`}
-                  title="YouTube video player"
+                  src="https://www.youtube.com/embed/Rq_jiv0Ccrw?si=zKPVbMu4ZP3VDUEf"
+                  title="Repix Handyman Services"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -63,16 +81,16 @@ export default function Portfolio() {
             </div>
             <div className="lg:w-1/2 w-full">
               <span className="font-mono text-primary text-sm uppercase tracking-widest mb-2 block">
-                {featuredVideo.category}
+                Service Promo
               </span>
               <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-6">
-                {featuredVideo.title}
+                Repix Handyman Services
               </h2>
               <p className="font-mono text-muted-foreground text-lg mb-8 leading-relaxed">
-                {featuredVideo.desc}
+                A professional showcase of handyman services, highlighting expertise and reliability through dynamic video content.
               </p>
               <div className="flex gap-4">
-                <a href={`https://youtube.com/shorts/${featuredVideo.embedId}`} target="_blank" rel="noopener noreferrer">
+                <a href="https://youtu.be/Rq_jiv0Ccrw?si=zKPVbMu4ZP3VDUEf" target="_blank" rel="noopener noreferrer">
                   <Button size="lg" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest">
                     Watch on YouTube <ExternalLink className="ml-2 w-4 h-4" />
                   </Button>
@@ -92,7 +110,7 @@ export default function Portfolio() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projects.map((project, index) => (
-              <div key={index} className="group relative aspect-video overflow-hidden border border-border bg-card cursor-pointer">
+              <div key={index} className="group relative aspect-[9/16] overflow-hidden border border-border bg-card cursor-pointer">
                 <div className="absolute inset-0 bg-black/60 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col items-center justify-center text-center p-8">
                   <span className="font-mono text-primary text-xs uppercase tracking-widest mb-2 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-75">
                     {project.category}
@@ -103,14 +121,15 @@ export default function Portfolio() {
                   <p className="font-mono text-gray-300 text-xs max-w-xs mb-6 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-300 delay-150 hidden sm:block">
                     {project.desc}
                   </p>
-                  <Button variant="outline" className="rounded-full w-12 h-12 p-0 border-2 border-white text-white hover:bg-white hover:text-black transition-all duration-300 translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 delay-200">
-                    <Play className="w-5 h-5 ml-1" />
-                  </Button>
                 </div>
-                <img 
-                  src={project.image} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                <video 
+                  src={project.video} 
+                  className="w-full h-full object-cover transition-all duration-700"
+                  muted
+                  loop
+                  playsInline
+                  onMouseOver={(e) => e.currentTarget.play()}
+                  onMouseOut={(e) => e.currentTarget.pause()}
                 />
               </div>
             ))}
