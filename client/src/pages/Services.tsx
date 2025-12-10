@@ -32,27 +32,11 @@ export default function Services() {
 
   const pricingPackages = [
     {
-      title: "TikTok Growth",
-      price: "$800",
-      originalPrice: "$1,000",
-      discount: "$200 OFF First Month",
-      description: "Dominate the For You Page with consistent, high-energy content.",
-      features: [
-        "3 TikToks Per Week",
-        "2 Posts/Carousels Per Week",
-        "Total: 12 TikToks/Month",
-        "Total: 8 Posts/Month",
-        "Scripting & Editing Included",
-        "Monthly Strategy Call"
-      ],
-      highlight: false
-    },
-    {
-      title: "Instagram Scale",
+      title: "Starter",
       price: "$1,000",
       originalPrice: "$1,200",
       discount: "$200 OFF First Month",
-      description: "Elevate your brand aesthetic and reach new audiences on IG.",
+      description: "Perfect for businesses just starting to build their digital footprint.",
       features: [
         "2 Reels Per Week",
         "1 Carousel Per Week",
@@ -64,11 +48,11 @@ export default function Services() {
       highlight: false
     },
     {
-      title: "The Power Combo",
+      title: "Growth",
       price: "$1,500",
       originalPrice: "$1,800",
       discount: "$300 OFF First Month",
-      description: "Maximum impact across both major platforms. Our most popular package.",
+      description: "Our most popular package. Designed for rapid scaling and maximum engagement.",
       features: [
         "2 Instagram Reels Per Week",
         "2 TikToks Per Week",
@@ -78,6 +62,23 @@ export default function Services() {
         "Cross-Platform Strategy"
       ],
       highlight: true
+    },
+    {
+      title: "Dominance",
+      price: "$2,500",
+      originalPrice: "$3,000",
+      discount: "$500 OFF First Month",
+      description: "The ultimate package for brands that want to own their niche completely.",
+      features: [
+        "4 Reels/TikToks Per Week",
+        "3 Carousels/Posts Per Week",
+        "Total: 16 Videos/Month",
+        "Total: 12 Posts/Month",
+        "Dedicated Account Manager",
+        "Advanced Analytics & Strategy",
+        "Priority Support"
+      ],
+      highlight: false
     }
   ];
 
