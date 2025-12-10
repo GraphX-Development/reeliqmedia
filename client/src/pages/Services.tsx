@@ -38,9 +38,7 @@ export default function Services() {
       discount: "$200 OFF First Month",
       description: "Perfect for businesses just starting to build their digital footprint.",
       features: [
-        "2 Reels Per Week",
         "2 Posts/Carousels Per Week",
-        "Total: 8 Reels/Month",
         "Total: 8 Posts/Month",
         "Basic Strategy",
         "Format Research"
