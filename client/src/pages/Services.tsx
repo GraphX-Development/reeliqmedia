@@ -33,46 +33,46 @@ export default function Services() {
   const pricingPackages = [
     {
       title: "Starter",
-      price: "$1,000",
-      originalPrice: "$1,200",
+      price: "$600",
+      originalPrice: "$800",
       discount: "$200 OFF First Month",
       description: "Perfect for businesses just starting to build their digital footprint.",
       features: [
         "2 Reels Per Week",
-        "1 Carousel Per Week",
+        "2 Posts/Carousels Per Week",
         "Total: 8 Reels/Month",
-        "Total: 4 Carousels/Month",
-        "Hashtag Strategy",
-        "Community Engagement"
+        "Total: 8 Posts/Month",
+        "Basic Strategy",
+        "Format Research"
       ],
       highlight: false
     },
     {
       title: "Growth",
-      price: "$1,500",
-      originalPrice: "$1,800",
+      price: "$1,200",
+      originalPrice: "$1,500",
       discount: "$300 OFF First Month",
       description: "Our most popular package. Designed for rapid scaling and maximum engagement.",
       features: [
-        "2 Instagram Reels Per Week",
-        "2 TikToks Per Week",
-        "2 Carousels/Posts Per Week",
-        "Total: 16 Videos/Month",
-        "Total: 8 Posts/Month",
+        "3 Short-Form Videos Per Week",
+        "3 Posts/Carousels Per Week",
+        "Total: 12 Videos/Month",
+        "Total: 12 Posts/Month",
+        "Viral Format Research",
         "Cross-Platform Strategy"
       ],
       highlight: true
     },
     {
       title: "Dominance",
-      price: "$2,500",
-      originalPrice: "$3,000",
-      discount: "$500 OFF First Month",
+      price: "$2,000",
+      originalPrice: "$2,600",
+      discount: "$600 OFF First Month",
       description: "The ultimate package for brands that want to own their niche completely.",
       features: [
-        "4 Reels/TikToks Per Week",
-        "3 Carousels/Posts Per Week",
-        "Total: 16 Videos/Month",
+        "5 Short-Form Videos Per Week",
+        "3 Posts/Carousels Per Week",
+        "Total: 20 Videos/Month",
         "Total: 12 Posts/Month",
         "Dedicated Account Manager",
         "Advanced Analytics & Strategy",
