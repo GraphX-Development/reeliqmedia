@@ -79,16 +79,6 @@ export default function About() {
           <div className="max-w-4xl mx-auto">
             <div className="group relative border border-border bg-background p-4 hover:border-primary transition-all duration-300">
               <div className="aspect-video overflow-hidden mb-8 relative">
-                {/* Placeholder for the "two dudes" pic mentioned by user, assuming it's one of the provided images or will be added later. 
-                    Based on file list, I'll use a generic placeholder or one of the provided ones if it fits. 
-                    The user mentioned "pic with two dudes in about us its chris and pavel". 
-                    I don't see a file clearly named "two dudes", but I'll use _MG_1012.jpg as a placeholder or just a div if not sure.
-                    Actually, let's use the filming one as a placeholder for now since I don't have a specific "two dudes" file identified with certainty 
-                    other than potentially one of the _MG files. I'll use a generic placeholder approach for the image source if I can't identify it, 
-                    but I'll use one of the uploaded ones to be safe. 
-                    Wait, looking at the file list: _MG_0014.jpg, _MG_1012.jpg, DSC01013.jpg, _MG_0905.jpg, _MG_0857.jpg.
-                    _MG_1012 is filming. _MG_0905 is editing. _MG_0857 is writing. DSC01013 is clock. _MG_0014 is likely the one.
-                */}
                 <img 
                   src="/images/_MG_0932.jpg" 
                   alt="Chris and Pavel" 

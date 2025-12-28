@@ -18,9 +18,9 @@ export default function Home() {
           />
         </div>
 
-        <div className="container relative z-20 px-4 flex flex-col items-start justify-start h-full pt-32">
-          <div className="inline-block mb-4 px-2 py-0.5 md:px-3 md:py-1 border border-primary/50 bg-primary/10 backdrop-blur-sm">
-            <span className="text-primary font-mono text-[8px] md:text-sm uppercase tracking-widest">Social Media Marketing Agency</span>
+        <div className="container relative z-20 px-4 flex flex-col items-start justify-center h-full pt-20">
+          <div className="inline-block mb-4 px-3 py-1 border border-primary/50 bg-primary/10 backdrop-blur-sm">
+            <span className="text-primary font-mono text-sm uppercase tracking-widest">Social Media Marketing Agency</span>
           </div>
           
           <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold uppercase leading-[0.85] tracking-tighter text-foreground mb-6 max-w-5xl">
@@ -34,13 +34,13 @@ export default function Home() {
           
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/contact">
-              <Button size="lg" className="rounded-none text-sm md:text-lg px-6 py-4 md:px-8 md:py-6 font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 group">
+              <Button size="lg" className="rounded-none text-lg px-8 py-6 font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 group">
                 Start Your Project
                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
             <Link href="/portfolio">
-              <Button variant="outline" size="lg" className="rounded-none text-sm md:text-lg px-6 py-4 md:px-8 md:py-6 font-bold uppercase tracking-widest border-2 hover:bg-foreground hover:text-background transition-all duration-300">
+              <Button variant="outline" size="lg" className="rounded-none text-lg px-8 py-6 font-bold uppercase tracking-widest border-2 hover:bg-foreground hover:text-background transition-all duration-300">
                 View Our Work
               </Button>
             </Link>
@@ -95,11 +95,11 @@ export default function Home() {
             ].map((service, index) => (
               <div key={index} className="group relative border border-border bg-card hover:border-primary transition-colors duration-300 h-full flex flex-col">
                 <div className="h-48 overflow-hidden relative">
-                  
+                  <div className="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors z-10"></div>
                   <img 
                     src={service.image} 
                     alt={service.title} 
-                    className="w-full h-full object-cover transition-all duration-500 transform group-hover:scale-110"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 transform group-hover:scale-110"
                   />
                 </div>
                 <div className="p-8 flex flex-col flex-grow">
@@ -133,7 +133,7 @@ export default function Home() {
             />
           </div>
           <div className="p-12 lg:p-24 flex flex-col justify-center">
-            <span className="font-mono tetext-[10px] md:text-sm uppercase tracking-widest mb-4">Who We Are</span>
+            <span className="font-mono text-primary text-sm uppercase tracking-widest mb-4">Who We Are</span>
             <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tighter mb-8">
               Local Roots, <br/>
               <span className="text-secondary">Global Vision</span>
@@ -161,7 +161,7 @@ export default function Home() {
             Stop blending in. Start standing out. Let's create something extraordinary together.
           </p>
           <Link href="/contact">
-            <Button size="lg" className="rounded-none text-lg md:text-xl px-8 py-6 md:px-12 md:py-8 font-bold uppercase tracking-widest bg-foreground text-background hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
+            <Button size="lg" className="rounded-none text-xl px-12 py-8 font-bold uppercase tracking-widest bg-foreground text-background hover:bg-primary hover:text-primary-foreground transition-all duration-300 shadow-[8px_8px_0px_0px_rgba(255,255,255,0.1)] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px]">
               Get A Quote
             </Button>
           </Link>

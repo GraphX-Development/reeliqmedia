@@ -88,27 +88,31 @@ const ReelCarousel = ({ items }: { items: any[] }) => {
                         {project.desc}
                       </p>
                     </div>
-                    <video 
-                      src={project.video} 
-                      className="w-full h-full object-cover"
-                      muted
-                      loop
-                      playsInline
-                      onMouseOver={(e) => e.currentTarget.play()}
-                      onMouseOut={(e) => e.currentTarget.pause()}
-                    />
+                    {/* Static YouTube Thumbnail for Card (High Quality) */}
+                    <div className="w-full h-full bg-black">
+                      <img 
+                        src={`https://img.youtube.com/vi/${project.embedId}/maxresdefault.jpg`}
+                        alt={project.title}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback to hqdefault if maxresdefault is unavailable
+                          e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`;
+                        }}
+                      />
+                    </div>
                   </div>
                 </DialogTrigger>
-                <DialogContent className="max-w-md p-0 border-none bg-black overflow-hidden">
+                <DialogContent className="max-w-lg p-0 border-none bg-black overflow-hidden">
                   <DialogTitle className="sr-only">{project.title}</DialogTitle>
                   <DialogDescription className="sr-only">{project.desc}</DialogDescription>
                   <div className="relative aspect-[9/16] w-full">
-                    <video 
-                      src={project.video} 
-                      className="w-full h-full object-contain"
-                      controls
-                      autoPlay
-                      playsInline
+                    <iframe 
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&vq=hd1080`}
+                      title={project.title}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
                     />
                   </div>
                 </DialogContent>
@@ -133,22 +137,22 @@ export default function Portfolio() {
 
   const meditincShorts = [
     {
-      title: "Meditinc Series",
-      category: "Educational Reels",
-      video: "/videos/Reel2_comp.mp4",
-      desc: "Simplifying complex medical topics through engaging visual storytelling."
+      title: "Meditinc Fiberscope",
+      category: "Product Demo",
+      embedId: "i3YZw8XqglE",
+      desc: "Detailed look at the Fiberscope technology."
     },
     {
       title: "Meditinc Inspection",
-      category: "Product Demo",
-      video: "/videos/Reel4_comp.mp4",
-      desc: "Detailed inspection workflow showcasing product capabilities."
+      category: "Workflow Demo",
+      embedId: "jK8TG_fmBnE",
+      desc: "Showcasing the inspection process efficiency."
     },
     {
       title: "Meditinc Lighting",
       category: "Feature Highlight",
-      video: "/videos/Reel3_comp.mp4",
-      desc: "Demonstrating advanced lighting and viewing features."
+      embedId: "-il1KLepXyM",
+      desc: "Demonstrating advanced lighting capabilities."
     }
   ];
 
@@ -156,14 +160,20 @@ export default function Portfolio() {
     {
       title: "Repix Handyman",
       category: "Service Promo",
-      video: "/videos/Repix2_comp.mp4",
-      desc: "Showcasing professional handyman services with dynamic editing."
+      embedId: "jDNiwkaOaq4",
+      desc: "Showcasing professional handyman services."
     },
     {
       title: "Repix Services",
       category: "Brand Story",
-      video: "/videos/Repix3_comp.mp4",
+      embedId: "xGfEOCC20Lw",
       desc: "Building trust through authentic service demonstration."
+    },
+    {
+      title: "Repix Quality",
+      category: "Client Testimonial",
+      embedId: "EjuobZKe4QQ",
+      desc: "Highlighting the quality of work and customer satisfaction."
     }
   ];
 
@@ -189,7 +199,7 @@ export default function Portfolio() {
               <div className="relative aspect-[9/16] max-w-sm mx-auto lg:mx-0 border-4 border-border rounded-3xl overflow-hidden shadow-2xl">
                 <iframe 
                   className="w-full h-full"
-                  src={`https://www.youtube.com/embed/${featuredVideo.embedId}`}
+                  src={`https://www.youtube.com/embed/${featuredVideo.embedId}?vq=hd1080`}
                   title={featuredVideo.title}
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -231,7 +241,7 @@ export default function Portfolio() {
             <div className="relative aspect-video w-full border-4 border-border rounded-xl overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-500">
               <iframe 
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/eH93_kM6ctk?si=e3HF7LYAIebsAPI2"
+                src="https://www.youtube.com/embed/eH93_kM6ctk?si=e3HF7LYAIebsAPI2&vq=hd1080"
                 title="Meditinc Full Overview"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -263,7 +273,7 @@ export default function Portfolio() {
             <div className="relative aspect-video w-full border-4 border-border rounded-xl overflow-hidden shadow-xl grayscale hover:grayscale-0 transition-all duration-500">
               <iframe 
                 className="w-full h-full"
-                src="https://www.youtube.com/embed/Rq_jiv0Ccrw?si=zKPVbMu4ZP3VDUEf"
+                src="https://www.youtube.com/embed/Rq_jiv0Ccrw?si=zKPVbMu4ZP3VDUEf&vq=hd1080"
                 title="Repix Handyman Services"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -279,35 +289,6 @@ export default function Portfolio() {
           {/* Repix Shorts Carousel */}
           <div className="max-w-6xl mx-auto px-4 md:px-12">
             <ReelCarousel items={repixShorts} />
-          </div>
-        </div>
-      </section>
-
-      {/* Footer CTA */}
-      <section className="py-24 bg-background">
-        <div className="container px-4">
-          <div className="text-center bg-card border border-border p-12">
-            <h3 className="font-display text-3xl font-bold uppercase mb-6">See Our Full Feed</h3>
-            <p className="font-mono text-muted-foreground mb-8 max-w-xl mx-auto">
-              We post weekly. Follow us to see our latest work, behind-the-scenes content, and social media tips.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href="https://www.instagram.com/reeliqmedia/" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
-                  Instagram
-                </Button>
-              </a>
-              <a href="https://www.tiktok.com/@reeliqmedia" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground hover:border-secondary transition-colors">
-                  TikTok
-                </Button>
-              </a>
-              <a href="https://www.youtube.com/@ReelIQMedia" target="_blank" rel="noopener noreferrer">
-                <Button variant="outline" className="rounded-none text-sm md:text-base font-bold uppercase tracking-widest hover:bg-foreground hover:text-background hover:border-foreground transition-colors">
-                  YouTube
-                </Button>
-              </a>
-            </div>
           </div>
         </div>
       </section>
