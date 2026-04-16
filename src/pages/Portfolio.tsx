@@ -1,15 +1,7 @@
 // Design reminder: cinematic monochrome framing, crisp blue accents, compact copy, and premium motion-led portfolio blocks.
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ExternalLink } from "lucide-react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel";
 import {
   Dialog,
   DialogContent,
@@ -32,165 +24,70 @@ type ClientProject = {
   shorts: ShortVideo[];
 };
 
-const YouTubeBadge = ({ active }: { active: boolean }) => (
+const YouTubeBadge = () => (
   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-    <span
-      className={cn(
-        "relative flex h-[2.7rem] w-[3.95rem] items-center justify-center overflow-hidden rounded-[0.95rem] border border-white/10 bg-[#ff0033] transition-all duration-300",
-        active
-          ? "shadow-[0_0_18px_rgba(255,0,51,0.3)] group-hover:scale-[1.04] group-hover:shadow-[0_0_24px_rgba(255,0,51,0.42)] group-active:scale-[1.02]"
-          : "scale-95 opacity-82 shadow-[0_0_8px_rgba(255,0,51,0.12)]"
-      )}
-    >
-      <span
-        className={cn(
-          "absolute inset-y-0 left-[-42%] w-[34%] -skew-x-[18deg] bg-white/18 blur-md transition-transform duration-500",
-          active ? "group-hover:translate-x-[320%]" : "translate-x-0 opacity-0"
-        )}
-      />
-      <svg viewBox="0 0 36 24" aria-hidden="true" className="relative z-10 h-[1rem] w-[1rem] fill-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)]">
-        <path d="M13.2 6.2v11.6L23.6 12 13.2 6.2Z" />
+    <span className="relative flex h-[2.55rem] w-[3.8rem] items-center justify-center rounded-[0.9rem] bg-[#ff0033] shadow-[0_10px_24px_rgba(255,0,51,0.24)] transition-transform duration-300 group-hover:scale-[1.03]">
+      <span className="absolute inset-y-0 left-[-38%] w-[30%] -skew-x-[18deg] bg-white/16 blur-md opacity-0 transition-all duration-500 group-hover:translate-x-[315%] group-hover:opacity-100" />
+      <svg viewBox="0 0 36 24" aria-hidden="true" className="relative z-10 h-[1.05rem] w-[1.05rem] fill-white">
+        <path d="M13.5 6.1v11.8L24.2 12 13.5 6.1Z" />
       </svg>
     </span>
   </div>
 );
 
-const ShortCard = ({
-  project,
-  isActive,
-}: {
-  project: ShortVideo;
-  isActive: boolean;
-}) => {
-  const card = (
-    <article
-      className={cn(
-        "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500 ease-out",
-        isActive
-          ? "scale-100 opacity-100 shadow-[0_20px_58px_rgba(0,0,0,0.24)]"
-          : "scale-[0.9] opacity-58 blur-[1px]"
-      )}
-    >
-      <div className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black">
-          <img
-            src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
-            alt={project.title}
-            className={cn(
-              "h-full w-full object-cover transition-transform duration-700",
-              isActive ? "group-hover:scale-105" : ""
-            )}
-            loading="lazy"
-            onError={(e) => {
-              e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
-            }}
-          />
-        <div
-          className={cn(
-            "absolute inset-0 transition-all duration-300",
-            isActive
-              ? "bg-gradient-to-b from-black/60 via-black/10 to-black/75"
-              : "bg-gradient-to-b from-black/70 via-black/28 to-black/85"
-          )}
-        />
-        <div className="absolute inset-x-0 top-0 p-4">
-          <span
-            className={cn(
-              "font-mono text-[10px] uppercase tracking-[0.35em] transition-all duration-300",
-              isActive
-                ? "text-primary drop-shadow-[0_0_16px_rgba(7,130,255,0.28)]"
-                : "text-primary/60"
-            )}
-          >
-            {project.category}
-          </span>
-          <h4
-            className={cn(
-              "mt-2 max-w-[9.5rem] font-display text-[1.35rem] font-bold uppercase tracking-tight transition-all duration-300",
-              isActive
-                ? "text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)]"
-                : "text-white/72"
-            )}
-          >
-            {project.title}
-          </h4>
-        </div>
-        <YouTubeBadge active={isActive} />
-      </div>
-    </article>
-  );
-
-  if (!isActive) {
-    return <div className="group block w-full cursor-default select-none text-left">{card}</div>;
-  }
-
-  return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <button type="button" className="group w-full text-left" aria-label={`Open ${project.title}`}>
-          {card}
-        </button>
-      </DialogTrigger>
-      <DialogContent className="max-w-lg overflow-hidden border-none bg-black p-0">
-        <DialogTitle className="sr-only">{project.title}</DialogTitle>
-        <DialogDescription className="sr-only">Short-form client video.</DialogDescription>
-            <div className="relative aspect-[9/16] w-full">
-              <iframe
-                className="h-full w-full"
-                src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-                title={project.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+const ShortCard = ({ project }: { project: ShortVideo }) => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <button type="button" className="group w-full text-left" aria-label={`Open ${project.title}`}>
+        <article className="overflow-hidden rounded-[1.35rem] border border-border bg-card shadow-[0_14px_34px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)]">
+          <div className="relative aspect-[9/16] overflow-hidden bg-black">
+            <img
+              src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
+              alt={project.title}
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/12 to-black/78" />
+            <div className="absolute inset-x-0 top-0 p-4">
+              <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary/90">
+                {project.category}
+              </span>
+              <h4 className="mt-2 max-w-[10rem] font-display text-[1.2rem] font-bold uppercase tracking-tight text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.45)]">
+                {project.title}
+              </h4>
             </div>
-      </DialogContent>
-    </Dialog>
-  );
-};
+            <YouTubeBadge />
+          </div>
+        </article>
+      </button>
+    </DialogTrigger>
+    <DialogContent className="max-w-lg overflow-hidden border-none bg-black p-0">
+      <DialogTitle className="sr-only">{project.title}</DialogTitle>
+      <DialogDescription className="sr-only">Short-form client video.</DialogDescription>
+      <div className="relative aspect-[9/16] w-full">
+        <iframe
+          className="h-full w-full"
+          src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+          title={project.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
+    </DialogContent>
+  </Dialog>
+);
 
-const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
-  const [api, setApi] = useState<CarouselApi>();
-  const [current, setCurrent] = useState(0);
-  const loopedItems = [...items, ...items, ...items];
-
-  useEffect(() => {
-    if (!api) return;
-
-    const handleSelect = () => setCurrent(api.selectedScrollSnap());
-    handleSelect();
-    api.on("select", handleSelect);
-
-    return () => {
-      api.off("select", handleSelect);
-    };
-  }, [api]);
-
-  return (
-    <Carousel
-      setApi={setApi}
-      opts={{
-        align: "center",
-        loop: true,
-        skipSnaps: false,
-        dragFree: false,
-      }}
-      className="w-full"
-    >
-      <CarouselContent className="-ml-4 py-4 md:py-8">
-        {loopedItems.map((project, index) => (
-          <CarouselItem
-            key={`${project.embedId}-${index}`}
-            className="pl-4 basis-[78%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/3"
-          >
-            <ShortCard project={project} isActive={index === current} />
-          </CarouselItem>
-        ))}
-      </CarouselContent>
-      <CarouselPrevious className="hidden md:flex -left-6 border-border bg-background/90 backdrop-blur" />
-      <CarouselNext className="hidden md:flex -right-6 border-border bg-background/90 backdrop-blur" />
-    </Carousel>
-  );
-};
+const ShortsGrid = ({ items }: { items: ShortVideo[] }) => (
+  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((project) => (
+      <ShortCard key={project.embedId} project={project} />
+    ))}
+  </div>
+);
 
 const ProjectSection = ({
   project,
@@ -286,7 +183,7 @@ const ProjectSection = ({
                   </div>
                 </div>
                 <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
-                  <ShortsCarousel items={project.shorts} />
+                  <ShortsGrid items={project.shorts} />
                 </div>
               </div>
             </div>
