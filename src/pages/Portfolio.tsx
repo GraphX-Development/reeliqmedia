@@ -33,15 +33,12 @@ type ClientProject = {
 };
 
 const YouTubeBadge = () => (
-  <div className="mt-4 inline-flex items-center gap-3 rounded-full border border-white/15 bg-black/55 px-4 py-2 shadow-lg backdrop-blur-sm">
+  <div className="mt-4 inline-flex items-center rounded-full border border-white/15 bg-black/55 px-3 py-2 shadow-lg backdrop-blur-sm">
     <span className="flex h-8 w-12 items-center justify-center rounded-[0.9rem] bg-[#ff0033] shadow-[0_0_24px_rgba(255,0,51,0.35)]">
       <span
         className="ml-0.5 block h-0 w-0 border-y-[7px] border-y-transparent border-l-[12px] border-l-white"
         aria-hidden="true"
       />
-    </span>
-    <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/80">
-      Watch Short
     </span>
   </div>
 );
@@ -255,7 +252,7 @@ const ProjectSection = ({
 );
 
 export default function Portfolio() {
-  const [openProject, setOpenProject] = useState("FIBERSCOPE | MEDITINC");
+  const [openProjects, setOpenProjects] = useState<string[]>([]);
 
   const featuredVideo = {
     title: "Supplement King Promo",
@@ -372,9 +369,13 @@ export default function Portfolio() {
           <ProjectSection
             key={project.title}
             project={project}
-            isOpen={openProject === project.title}
+            isOpen={openProjects.includes(project.title)}
             onToggle={() =>
-              setOpenProject((current) => (current === project.title ? "" : project.title))
+              setOpenProjects((current) =>
+                current.includes(project.title)
+                  ? current.filter((title) => title !== project.title)
+                  : [...current, project.title]
+              )
             }
           />
         ))}
