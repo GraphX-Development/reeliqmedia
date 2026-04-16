@@ -367,11 +367,11 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <section className="border-b border-border bg-card py-16 md:py-20">
+      <section className="border-b border-border bg-card py-20 md:py-24">
         <div className="container px-4">
-          <div className="mx-auto grid max-w-5xl items-center gap-8 rounded-[2rem] border border-white/8 bg-background/40 p-5 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:p-8 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)] lg:gap-10">
+          <div className="mx-auto grid max-w-6xl items-center gap-10 rounded-[2.35rem] border border-white/8 bg-background/40 p-6 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:p-10 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-14 xl:grid-cols-[minmax(0,460px)_minmax(0,1fr)]">
             <div className="w-full">
-              <div className="relative mx-auto aspect-[9/16] max-w-sm overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
+              <div className="relative mx-auto aspect-[9/16] max-w-[28rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
                 <iframe
                   className="h-full w-full"
                   src={`https://www.youtube.com/embed/${featuredVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
@@ -382,11 +382,11 @@ export default function Portfolio() {
                 />
               </div>
             </div>
-            <div className="w-full max-w-xl rounded-[1.5rem] border border-white/8 bg-black/25 p-6 md:p-8">
-              <span className="mb-3 block font-mono text-sm uppercase tracking-widest text-primary">
+            <div className="w-full max-w-2xl rounded-[1.7rem] border border-white/8 bg-black/25 p-7 md:p-10">
+              <span className="mb-4 block font-mono text-sm uppercase tracking-widest text-primary md:text-base">
                 {featuredVideo.category}
               </span>
-              <h2 className="mb-5 font-display text-4xl font-bold uppercase tracking-tighter md:text-6xl">
+              <h2 className="mb-6 font-display text-5xl font-bold uppercase tracking-tighter md:text-7xl xl:text-[5.2rem]">
                 {featuredVideo.title}
               </h2>
               <a
@@ -394,7 +394,7 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="rounded-none text-sm font-bold uppercase tracking-widest md:text-base">
+                <Button size="lg" className="rounded-none px-7 text-sm font-bold uppercase tracking-widest md:h-14 md:text-base">
                   Watch on YouTube <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </a>
