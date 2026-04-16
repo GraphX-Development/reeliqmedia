@@ -2,13 +2,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ExternalLink } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 type ShortVideo = {
@@ -24,65 +17,23 @@ type ClientProject = {
   shorts: ShortVideo[];
 };
 
-const YouTubeBadge = () => (
-  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-    <span className="relative flex h-[2.55rem] w-[3.8rem] items-center justify-center rounded-[0.9rem] bg-[#ff0033] shadow-[0_10px_24px_rgba(255,0,51,0.24)] transition-transform duration-300 group-hover:scale-[1.03]">
-      <span className="absolute inset-y-0 left-[-38%] w-[30%] -skew-x-[18deg] bg-white/16 blur-md opacity-0 transition-all duration-500 group-hover:translate-x-[315%] group-hover:opacity-100" />
-      <svg viewBox="0 0 36 24" aria-hidden="true" className="relative z-10 h-[1.05rem] w-[1.05rem] fill-white">
-        <path d="M13.5 6.1v11.8L24.2 12 13.5 6.1Z" />
-      </svg>
-    </span>
-  </div>
-);
-
 const ShortCard = ({ project }: { project: ShortVideo }) => (
-  <Dialog>
-    <DialogTrigger asChild>
-      <button type="button" className="group w-full text-left" aria-label={`Open ${project.title}`}>
-        <article className="overflow-hidden rounded-[1.35rem] border border-border bg-card shadow-[0_14px_34px_rgba(0,0,0,0.16)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_42px_rgba(0,0,0,0.24)]">
-          <div className="relative aspect-[9/16] overflow-hidden bg-black">
-            <img
-              src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
-              alt={project.title}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              loading="lazy"
-              onError={(e) => {
-                e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/12 to-black/78" />
-            <div className="absolute inset-x-0 top-0 p-4">
-              <span className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary/90">
-                {project.category}
-              </span>
-              <h4 className="mt-2 max-w-[10rem] font-display text-[1.2rem] font-bold uppercase tracking-tight text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.45)]">
-                {project.title}
-              </h4>
-            </div>
-            <YouTubeBadge />
-          </div>
-        </article>
-      </button>
-    </DialogTrigger>
-    <DialogContent className="max-w-lg overflow-hidden border-none bg-black p-0">
-      <DialogTitle className="sr-only">{project.title}</DialogTitle>
-      <DialogDescription className="sr-only">Short-form client video.</DialogDescription>
-      <div className="relative aspect-[9/16] w-full">
-        <iframe
-          className="h-full w-full"
-          src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-          title={project.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </div>
-    </DialogContent>
-  </Dialog>
+  <article className="overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
+    <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
+      <iframe
+        className="h-full w-full"
+        src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+        title={project.title}
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
+      />
+    </div>
+  </article>
 );
 
 const ShortsGrid = ({ items }: { items: ShortVideo[] }) => (
-  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
     {items.map((project) => (
       <ShortCard key={project.embedId} project={project} />
     ))}
