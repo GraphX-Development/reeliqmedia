@@ -63,23 +63,25 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
     <Carousel
       setApi={setApi}
       opts={{
-        align: "start",
+        align: "center",
         loop: true,
+        skipSnaps: false,
+        dragFree: false,
       }}
       className="w-full"
     >
-      <CarouselContent className="-ml-4 py-2">
+      <CarouselContent className="-ml-4 py-4 md:py-8">
         {loopedItems.map((project, index) => (
-          <CarouselItem key={`${project.embedId}-${index}`} className="pl-4 basis-[86%] md:basis-1/2 xl:basis-1/3">
+          <CarouselItem key={`${project.embedId}-${index}`} className="pl-4 basis-[78%] sm:basis-[62%] lg:basis-[42%] xl:basis-[34%]">
             <Dialog>
               <DialogTrigger asChild>
                 <button type="button" className="group w-full text-left" aria-label={`Open ${project.title}`}>
                   <article
                     className={cn(
-                      "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500",
+                      "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500 ease-out",
                       index === current
-                        ? "shadow-[0_22px_60px_rgba(0,0,0,0.24)]"
-                        : "opacity-85 hover:opacity-100"
+                        ? "scale-100 opacity-100 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
+                        : "scale-[0.88] opacity-55 blur-[1px] hover:scale-[0.92] hover:opacity-80"
                     )}
                   >
                     <div className="relative aspect-[9/16] overflow-hidden bg-black">
@@ -128,15 +130,19 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden md:flex -left-4" />
-      <CarouselNext className="hidden md:flex -right-4" />
+      <CarouselPrevious className="hidden md:flex -left-6 border-border bg-background/90 backdrop-blur" />
+      <CarouselNext className="hidden md:flex -right-6 border-border bg-background/90 backdrop-blur" />
     </Carousel>
   );
 };
 
 const ProjectSection = ({ project, tone }: { project: ClientProject; tone: "light" | "dark" }) => (
-  <section className={cn("border-b border-border py-20", tone === "dark" ? "bg-card" : "bg-background")}>
+  <section className={cn("border-b border-border py-16 md:py-20", tone === "dark" ? "bg-card" : "bg-background")}>
     <div className="container px-4">
+      <div className={cn(
+        "overflow-hidden rounded-[2rem] border px-5 py-6 shadow-[0_20px_70px_rgba(0,0,0,0.12)] md:px-8 md:py-8",
+        tone === "dark" ? "border-white/8 bg-background/35" : "border-border bg-card/70"
+      )}>
       <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
         <div>
           <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">Client Project</span>
@@ -172,7 +178,7 @@ const ProjectSection = ({ project, tone }: { project: ClientProject; tone: "ligh
         </div>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">Shorts</span>
@@ -181,9 +187,10 @@ const ProjectSection = ({ project, tone }: { project: ClientProject; tone: "ligh
             </h4>
           </div>
         </div>
-        <div className="max-w-6xl pr-0 md:px-10">
+        <div className="mx-auto w-full max-w-6xl px-0 md:px-8">
           <ShortsCarousel items={project.shorts} />
         </div>
+      </div>
       </div>
     </div>
   </section>
