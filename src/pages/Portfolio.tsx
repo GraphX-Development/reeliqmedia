@@ -33,10 +33,10 @@ type ClientProject = {
 };
 
 const YouTubeBadge = () => (
-  <div className="mt-4 inline-flex items-center rounded-full border border-white/15 bg-black/55 px-3 py-2 shadow-lg backdrop-blur-sm">
-    <span className="flex h-8 w-12 items-center justify-center rounded-[0.9rem] bg-[#ff0033] shadow-[0_0_24px_rgba(255,0,51,0.35)]">
+  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+    <span className="flex h-18 w-18 items-center justify-center rounded-[1.6rem] border border-white/15 bg-[#ff0033] shadow-[0_0_0_rgba(255,0,51,0)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_36px_rgba(255,0,51,0.55)] group-active:scale-105 group-active:shadow-[0_0_42px_rgba(255,0,51,0.6)]">
       <span
-        className="ml-0.5 block h-0 w-0 border-y-[7px] border-y-transparent border-l-[12px] border-l-white"
+        className="ml-1 block h-0 w-0 border-y-[12px] border-y-transparent border-l-[18px] border-l-white"
         aria-hidden="true"
       />
     </span>
@@ -92,7 +92,7 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
                         : "scale-[0.88] opacity-55 blur-[1px] hover:scale-[0.92] hover:opacity-80"
                     )}
                   >
-                    <div className="relative aspect-[9/16] overflow-hidden bg-black">
+                    <div className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black">
                       <img
                         src={`https://img.youtube.com/vi/${project.embedId}/maxresdefault.jpg`}
                         alt={project.title}
@@ -101,21 +101,16 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
                           e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`;
                         }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/18 to-transparent" />
-                      <div className="absolute inset-x-0 bottom-0 p-5">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-primary">
+                      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-black/75" />
+                      <div className="absolute inset-x-0 top-0 p-5">
+                        <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-primary drop-shadow-[0_0_16px_rgba(7,130,255,0.28)]">
                           {project.category}
                         </span>
-                        <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white">
+                        <h4 className="mt-2 max-w-[11rem] font-display text-2xl font-bold uppercase tracking-tight text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)]">
                           {project.title}
                         </h4>
-                        <YouTubeBadge />
                       </div>
-                    </div>
-                    <div className="border-t border-border px-5 py-3">
-                      <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-                        Tap to open
-                      </p>
+                      <YouTubeBadge />
                     </div>
                   </article>
                 </button>
@@ -184,7 +179,7 @@ const ProjectSection = ({
                 )}
               />
               <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/88">
-                {isOpen ? "Close Project" : "Open Project"}
+                {isOpen ? "Close Portfolio" : "Open Portfolio"}
               </span>
               <span
                 className={cn(
