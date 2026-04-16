@@ -36,7 +36,7 @@ const YouTubeBadge = ({ active }: { active: boolean }) => (
   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
     <span
       className={cn(
-        "relative flex h-[3.3rem] w-[4.7rem] items-center justify-center overflow-hidden rounded-[1.05rem] border border-white/12 bg-[#ff0033] transition-all duration-300",
+        "relative flex h-[2.95rem] w-[4.1rem] items-center justify-center overflow-hidden rounded-[1rem] border border-white/12 bg-[#ff0033] transition-all duration-300",
         active
           ? "shadow-[0_0_18px_rgba(255,0,51,0.32)] group-hover:scale-[1.05] group-hover:shadow-[0_0_26px_rgba(255,0,51,0.45)] group-active:scale-[1.02]"
           : "scale-95 opacity-80 shadow-[0_0_8px_rgba(255,0,51,0.1)]"
@@ -44,14 +44,15 @@ const YouTubeBadge = ({ active }: { active: boolean }) => (
     >
       <span
         className={cn(
-          "absolute inset-y-0 left-[-42%] w-[34%] -skew-x-[18deg] bg-white/22 blur-md transition-transform duration-500",
-          active ? "group-hover:translate-x-[320%]" : "translate-x-0 opacity-0"
+          "absolute inset-y-0 left-[-40%] w-[32%] -skew-x-[18deg] bg-white/20 blur-md transition-transform duration-500",
+          active ? "group-hover:translate-x-[315%]" : "translate-x-0 opacity-0"
         )}
       />
-      <svg viewBox="0 0 48 34" aria-hidden="true" className="relative z-10 h-5 w-5" fill="none">
-        <path d="M46.2 5.3c-.5-1.9-2-3.4-3.9-3.9C38.8.5 24 .5 24 .5S9.2.5 5.7 1.4a5.5 5.5 0 0 0-3.9 3.9A57 57 0 0 0 .9 17a57 57 0 0 0 .9 11.7c.5 1.9 2 3.4 3.9 3.9 3.5.9 18.3.9 18.3.9s14.8 0 18.3-.9a5.5 5.5 0 0 0 3.9-3.9A57 57 0 0 0 47.1 17a57 57 0 0 0-.9-11.7Z" fill="white" fillOpacity="0.12" />
-        <path d="M19.5 10.3 31.8 17l-12.3 6.7V10.3Z" fill="white" />
-      </svg>
+      <span className="relative z-10 flex h-[1.22rem] w-[1.9rem] items-center justify-center rounded-[0.45rem] bg-white/14">
+        <svg viewBox="0 0 20 14" aria-hidden="true" className="h-[0.92rem] w-[0.92rem] fill-white">
+          <path d="M7 3.2v7.6L13.6 7 7 3.2Z" />
+        </svg>
+      </span>
     </span>
   </div>
 );
@@ -68,8 +69,8 @@ const ShortCard = ({
       className={cn(
         "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500 ease-out",
         isActive
-          ? "scale-100 opacity-100 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
-          : "scale-[0.88] opacity-55 blur-[1px]"
+          ? "scale-100 opacity-100 shadow-[0_20px_58px_rgba(0,0,0,0.24)]"
+          : "scale-[0.9] opacity-58 blur-[1px]"
       )}
     >
       <div className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black">
@@ -93,7 +94,7 @@ const ShortCard = ({
               : "bg-gradient-to-b from-black/70 via-black/28 to-black/85"
           )}
         />
-        <div className="absolute inset-x-0 top-0 p-5">
+        <div className="absolute inset-x-0 top-0 p-4">
           <span
             className={cn(
               "font-mono text-[10px] uppercase tracking-[0.35em] transition-all duration-300",
@@ -106,7 +107,7 @@ const ShortCard = ({
           </span>
           <h4
             className={cn(
-              "mt-2 max-w-[11rem] font-display text-2xl font-bold uppercase tracking-tight transition-all duration-300",
+              "mt-2 max-w-[9.5rem] font-display text-[1.35rem] font-bold uppercase tracking-tight transition-all duration-300",
               isActive
                 ? "text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)]"
                 : "text-white/72"
@@ -181,7 +182,7 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
         {loopedItems.map((project, index) => (
           <CarouselItem
             key={`${project.embedId}-${index}`}
-            className="pl-4 basis-[78%] sm:basis-[62%] lg:basis-[42%] xl:basis-[34%]"
+            className="pl-4 basis-[72%] sm:basis-[56%] lg:basis-[38%] xl:basis-[30%]"
           >
             <ShortCard project={project} isActive={index === current} />
           </CarouselItem>
@@ -261,7 +262,7 @@ const ProjectSection = ({
                     </span>
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-[1.5rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+                <div className="mx-auto max-w-5xl overflow-hidden rounded-[1.35rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
                   <div className="relative aspect-video w-full">
                       <iframe
                         className="h-full w-full"
@@ -286,7 +287,7 @@ const ProjectSection = ({
                     </h4>
                   </div>
                 </div>
-                <div className="mx-auto w-full max-w-6xl px-0 md:px-8">
+                <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
                   <ShortsCarousel items={project.shorts} />
                 </div>
               </div>
@@ -369,35 +370,37 @@ export default function Portfolio() {
 
       <section className="border-b border-border bg-card py-24 md:py-28">
         <div className="container max-w-[108rem] px-4">
-          <div className="mx-auto grid min-h-[46rem] items-center gap-14 rounded-[2.7rem] border border-white/8 bg-background/40 px-6 py-8 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:px-10 md:py-12 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-28 xl:grid-cols-[minmax(0,460px)_minmax(0,1fr)] xl:px-16">
-            <div className="w-full lg:justify-self-start lg:-ml-4 xl:-ml-8">
-              <div className="relative mx-auto aspect-[9/16] max-w-[27rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
-                <iframe
-                  className="h-full w-full"
-                  src={`https://www.youtube.com/embed/${featuredVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-                  title={featuredVideo.title}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
+          <div className="mx-auto rounded-[2.7rem] border border-white/8 bg-background/40 px-6 py-8 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:px-10 md:py-12 xl:px-16">
+            <div className="mx-auto grid min-h-[46rem] w-full max-w-[78rem] items-center gap-10 lg:grid-cols-[minmax(0,388px)_minmax(0,1fr)] lg:gap-16 xl:max-w-[82rem] xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-18">
+              <div className="w-full lg:justify-self-start lg:ml-3 xl:ml-5">
+                <div className="relative mx-auto aspect-[9/16] max-w-[25rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
+                  <iframe
+                    className="h-full w-full"
+                    src={`https://www.youtube.com/embed/${featuredVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+                    title={featuredVideo.title}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
               </div>
-            </div>
-            <div className="w-full max-w-[44rem] pl-0 lg:pl-2 xl:pl-4">
-              <span className="mb-4 block font-mono text-xs uppercase tracking-[0.32em] text-primary md:text-sm">
-                {featuredVideo.category}
-              </span>
-              <h2 className="mb-7 font-display text-4xl font-bold uppercase tracking-tighter md:text-6xl xl:text-[4.9rem]">
-                {featuredVideo.title}
-              </h2>
-              <a
-                href={`https://youtube.com/shorts/${featuredVideo.embedId}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button size="lg" className="rounded-none px-7 text-xs font-bold uppercase tracking-[0.28em] md:h-13 md:text-sm">
-                  Watch on YouTube <ExternalLink className="ml-2 h-4 w-4" />
-                </Button>
-              </a>
+              <div className="w-full max-w-[39rem] pl-0 lg:pl-1 xl:pl-2">
+                <span className="mb-4 block font-mono text-xs uppercase tracking-[0.32em] text-primary md:text-sm">
+                  {featuredVideo.category}
+                </span>
+                <h2 className="mb-6 font-display text-[2.7rem] font-bold uppercase tracking-tighter md:text-5xl xl:text-[4.35rem]">
+                  {featuredVideo.title}
+                </h2>
+                <a
+                  href={`https://youtube.com/shorts/${featuredVideo.embedId}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button size="lg" className="rounded-none px-7 text-xs font-bold uppercase tracking-[0.28em] md:h-13 md:text-sm">
+                    Watch on YouTube <ExternalLink className="ml-2 h-4 w-4" />
+                  </Button>
+                </a>
+              </div>
             </div>
           </div>
         </div>
