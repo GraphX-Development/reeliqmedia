@@ -36,24 +36,23 @@ const YouTubeBadge = ({ active }: { active: boolean }) => (
   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
     <span
       className={cn(
-        "flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-[1.75rem] border transition-all duration-300",
+        "flex h-[5.2rem] w-[5.2rem] items-center justify-center transition-all duration-300",
         active
-          ? "border-white/20 bg-[#ff0033] shadow-[0_0_34px_rgba(255,0,51,0.45)] group-hover:scale-110 group-hover:shadow-[0_0_44px_rgba(255,0,51,0.62)] group-active:scale-105"
-          : "border-white/10 bg-[#ff0033]/70 shadow-none"
+          ? "drop-shadow-[0_0_26px_rgba(255,0,51,0.42)] group-hover:scale-110 group-hover:drop-shadow-[0_0_38px_rgba(255,0,51,0.58)] group-active:scale-105"
+          : "scale-95 opacity-78"
       )}
     >
       <svg
-        viewBox="0 0 24 24"
+        viewBox="0 0 96 96"
         aria-hidden="true"
-        className={cn("h-9 w-9 transition-transform duration-300", active ? "scale-100" : "scale-95 opacity-90")}
+        className="h-14 w-14"
         fill="none"
       >
-        <path
-          d="M15.6 3.7c1 0 1.9.52 2.38 1.36l.7 1.22a2.75 2.75 0 0 0 1.38 1.17l1.4.56c.97.39 1.59 1.33 1.59 2.37 0 1.03-.62 1.97-1.6 2.36l-1.39.56a2.75 2.75 0 0 0-1.37 1.18l-.71 1.22a2.74 2.74 0 0 1-2.38 1.36c-1 0-1.9-.52-2.38-1.36l-.7-1.22a2.75 2.75 0 0 0-1.38-1.18l-1.4-.56a2.54 2.54 0 0 1-1.59-2.36c0-1.04.62-1.98 1.6-2.37l1.39-.56a2.75 2.75 0 0 0 1.37-1.17l.71-1.22A2.74 2.74 0 0 1 15.6 3.7Z"
-          fill="white"
-          transform="rotate(90 12 12)"
-        />
-        <path d="M11 9.4 15.6 12 11 14.6V9.4Z" fill="#ff0033" />
+        <g transform="translate(48 48) rotate(-32)">
+          <rect x="-17" y="-31" width="34" height="28" rx="14" fill="#ff0033" />
+          <rect x="-17" y="3" width="34" height="28" rx="14" fill="#ff0033" />
+        </g>
+        <path d="M43 35.5 60 48 43 60.5V35.5Z" fill="white" />
       </svg>
     </span>
   </div>
@@ -76,17 +75,18 @@ const ShortCard = ({
       )}
     >
       <div className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black">
-        <img
-          src={`https://img.youtube.com/vi/${project.embedId}/maxresdefault.jpg`}
-          alt={project.title}
-          className={cn(
-            "h-full w-full object-cover transition-transform duration-700",
-            isActive ? "group-hover:scale-105" : ""
-          )}
-          onError={(e) => {
-            e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`;
-          }}
-        />
+          <img
+            src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
+            alt={project.title}
+            className={cn(
+              "h-full w-full object-cover transition-transform duration-700",
+              isActive ? "group-hover:scale-105" : ""
+            )}
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
+            }}
+          />
         <div
           className={cn(
             "absolute inset-0 transition-all duration-300",
