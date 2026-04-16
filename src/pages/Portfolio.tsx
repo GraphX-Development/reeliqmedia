@@ -151,23 +151,16 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
 
 const ProjectSection = ({
   project,
-  tone,
   isOpen,
   onToggle,
 }: {
   project: ClientProject;
-  tone: "light" | "dark";
   isOpen: boolean;
   onToggle: () => void;
 }) => (
-  <section className={cn("py-6 md:py-8", tone === "dark" ? "bg-card" : "bg-background")}>
+  <section className="bg-card py-6 md:py-8">
     <div className="container px-4">
-      <div
-        className={cn(
-          "overflow-hidden rounded-[2rem] border shadow-[0_20px_70px_rgba(0,0,0,0.14)] transition-all duration-500",
-          tone === "dark" ? "border-white/8 bg-background/35" : "border-border bg-card/70"
-        )}
-      >
+      <div className="overflow-hidden rounded-[2rem] border border-white/8 bg-background/35 shadow-[0_20px_70px_rgba(0,0,0,0.14)] transition-all duration-500">
         <button
           type="button"
           onClick={onToggle}
@@ -182,23 +175,28 @@ const ProjectSection = ({
               <h3 className="font-display text-3xl font-bold uppercase tracking-tight md:text-5xl">
                 {project.title}
               </h3>
-              <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
-                {project.shorts.length} Shorts
-              </span>
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center gap-3">
-            <span className="hidden rounded-full border border-border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground md:inline-flex">
-              {isOpen ? "Close Project" : "Open Project"}
-            </span>
-            <span
-              className={cn(
-                "flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/80 transition-transform duration-300",
-                isOpen ? "rotate-180" : "rotate-0"
-              )}
-            >
-              <ChevronDown className="h-5 w-5" />
+          <div className="flex shrink-0 items-center">
+            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-3 py-3 text-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] backdrop-blur-md transition-all duration-300 md:px-4">
+              <span
+                className={cn(
+                  "h-2.5 w-2.5 rounded-full transition-all duration-300",
+                  isOpen ? "bg-primary shadow-[0_0_18px_rgba(7,130,255,0.65)]" : "bg-white/35"
+                )}
+              />
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/88">
+                {isOpen ? "Close Project" : "Open Project"}
+              </span>
+              <span
+                className={cn(
+                  "flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/30 transition-all duration-300",
+                  isOpen ? "rotate-180 bg-primary/15 text-primary" : "rotate-0 text-white/80"
+                )}
+              >
+                <ChevronDown className="h-4 w-4" />
+              </span>
             </span>
           </div>
         </button>
@@ -383,11 +381,10 @@ export default function Portfolio() {
       </section>
 
       <div className="border-b border-border bg-background py-6 md:py-8">
-        {projects.map((project, index) => (
+        {projects.map((project) => (
           <ProjectSection
             key={project.title}
             project={project}
-            tone={index % 2 === 0 ? "light" : "dark"}
             isOpen={openProject === project.title}
             onToggle={() =>
               setOpenProject((current) => (current === project.title ? "" : project.title))
