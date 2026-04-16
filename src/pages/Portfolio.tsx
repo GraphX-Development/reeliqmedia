@@ -1,7 +1,15 @@
 // Design reminder: cinematic monochrome framing, crisp blue accents, compact copy, and premium motion-led portfolio blocks.
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ExternalLink } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
 type ShortVideo = {
@@ -17,8 +25,21 @@ type ClientProject = {
   shorts: ShortVideo[];
 };
 
-const ShortCard = ({ project }: { project: ShortVideo }) => (
-  <article className="overflow-hidden rounded-[1.75rem] border border-border bg-card shadow-[0_18px_42px_rgba(0,0,0,0.18)]">
+const ShortCard = ({
+  project,
+  isActive,
+}: {
+  project: ShortVideo;
+  isActive: boolean;
+}) => (
+  <article
+    className={cn(
+      "overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-500 ease-out",
+      isActive
+        ? "scale-100 opacity-100 shadow-[0_20px_58px_rgba(0,0,0,0.24)]"
+        : "scale-[0.92] opacity-60"
+    )}
+  >
     <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
       <iframe
         className="h-full w-full"
@@ -28,17 +49,54 @@ const ShortCard = ({ project }: { project: ShortVideo }) => (
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       />
+      {!isActive ? <div className="pointer-events-none absolute inset-0 bg-black/28" /> : null}
     </div>
   </article>
 );
 
-const ShortsGrid = ({ items }: { items: ShortVideo[] }) => (
-  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-    {items.map((project) => (
-      <ShortCard key={project.embedId} project={project} />
-    ))}
-  </div>
-);
+const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const loopedItems = [...items, ...items, ...items];
+
+  useEffect(() => {
+    if (!api) return;
+
+    const handleSelect = () => setCurrent(api.selectedScrollSnap());
+    handleSelect();
+    api.on("select", handleSelect);
+
+    return () => {
+      api.off("select", handleSelect);
+    };
+  }, [api]);
+
+  return (
+    <Carousel
+      setApi={setApi}
+      opts={{
+        align: "center",
+        loop: true,
+        skipSnaps: false,
+        dragFree: false,
+      }}
+      className="w-full"
+    >
+      <CarouselContent className="-ml-4 py-4 md:py-8">
+        {loopedItems.map((project, index) => (
+          <CarouselItem
+            key={`${project.embedId}-${index}`}
+            className="pl-4 basis-[82%] sm:basis-[56%] lg:basis-[34%] xl:basis-[34%]"
+          >
+            <ShortCard project={project} isActive={index === current} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="hidden md:flex -left-6 border-border bg-background/90 backdrop-blur" />
+      <CarouselNext className="hidden md:flex -right-6 border-border bg-background/90 backdrop-blur" />
+    </Carousel>
+  );
+};
 
 const ProjectSection = ({
   project,
@@ -134,7 +192,7 @@ const ProjectSection = ({
                   </div>
                 </div>
                 <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
-                  <ShortsGrid items={project.shorts} />
+                  <ShortsCarousel items={project.shorts} />
                 </div>
               </div>
             </div>
