@@ -36,20 +36,20 @@ const YouTubeBadge = ({ active }: { active: boolean }) => (
   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
     <span
       className={cn(
-        "relative flex h-[4.05rem] w-[5.75rem] items-center justify-center overflow-hidden rounded-[1.35rem] border border-white/12 bg-[#ff0033] transition-all duration-300",
+        "relative flex h-[3.3rem] w-[4.7rem] items-center justify-center overflow-hidden rounded-[1.05rem] border border-white/12 bg-[#ff0033] transition-all duration-300",
         active
-          ? "shadow-[0_0_24px_rgba(255,0,51,0.38)] group-hover:scale-[1.06] group-hover:shadow-[0_0_34px_rgba(255,0,51,0.52)] group-active:scale-[1.03]"
-          : "scale-95 opacity-80 shadow-[0_0_10px_rgba(255,0,51,0.12)]"
+          ? "shadow-[0_0_18px_rgba(255,0,51,0.32)] group-hover:scale-[1.05] group-hover:shadow-[0_0_26px_rgba(255,0,51,0.45)] group-active:scale-[1.02]"
+          : "scale-95 opacity-80 shadow-[0_0_8px_rgba(255,0,51,0.1)]"
       )}
     >
       <span
         className={cn(
-          "absolute inset-y-0 left-[-42%] w-[38%] -skew-x-[18deg] bg-white/24 blur-md transition-transform duration-500",
+          "absolute inset-y-0 left-[-42%] w-[34%] -skew-x-[18deg] bg-white/22 blur-md transition-transform duration-500",
           active ? "group-hover:translate-x-[320%]" : "translate-x-0 opacity-0"
         )}
       />
-      <svg viewBox="0 0 48 34" aria-hidden="true" className="relative z-10 h-7 w-7" fill="none">
-        <path d="M46.2 5.3c-.5-1.9-2-3.4-3.9-3.9C38.8.5 24 .5 24 .5S9.2.5 5.7 1.4a5.5 5.5 0 0 0-3.9 3.9A57 57 0 0 0 .9 17a57 57 0 0 0 .9 11.7c.5 1.9 2 3.4 3.9 3.9 3.5.9 18.3.9 18.3.9s14.8 0 18.3-.9a5.5 5.5 0 0 0 3.9-3.9A57 57 0 0 0 47.1 17a57 57 0 0 0-.9-11.7Z" fill="white" fillOpacity="0.14" />
+      <svg viewBox="0 0 48 34" aria-hidden="true" className="relative z-10 h-5 w-5" fill="none">
+        <path d="M46.2 5.3c-.5-1.9-2-3.4-3.9-3.9C38.8.5 24 .5 24 .5S9.2.5 5.7 1.4a5.5 5.5 0 0 0-3.9 3.9A57 57 0 0 0 .9 17a57 57 0 0 0 .9 11.7c.5 1.9 2 3.4 3.9 3.9 3.5.9 18.3.9 18.3.9s14.8 0 18.3-.9a5.5 5.5 0 0 0 3.9-3.9A57 57 0 0 0 47.1 17a57 57 0 0 0-.9-11.7Z" fill="white" fillOpacity="0.12" />
         <path d="M19.5 10.3 31.8 17l-12.3 6.7V10.3Z" fill="white" />
       </svg>
     </span>
