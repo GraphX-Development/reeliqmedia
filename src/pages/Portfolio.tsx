@@ -1,6 +1,7 @@
+// Design reminder: cinematic monochrome framing, crisp blue accents, compact copy, and premium motion-led portfolio blocks.
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -53,10 +54,13 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
   useEffect(() => {
     if (!api) return;
 
-    setCurrent(api.selectedScrollSnap());
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap());
-    });
+    const handleSelect = () => setCurrent(api.selectedScrollSnap());
+    handleSelect();
+    api.on("select", handleSelect);
+
+    return () => {
+      api.off("select", handleSelect);
+    };
   }, [api]);
 
   return (
@@ -72,10 +76,17 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
     >
       <CarouselContent className="-ml-4 py-4 md:py-8">
         {loopedItems.map((project, index) => (
-          <CarouselItem key={`${project.embedId}-${index}`} className="pl-4 basis-[78%] sm:basis-[62%] lg:basis-[42%] xl:basis-[34%]">
+          <CarouselItem
+            key={`${project.embedId}-${index}`}
+            className="pl-4 basis-[78%] sm:basis-[62%] lg:basis-[42%] xl:basis-[34%]"
+          >
             <Dialog>
               <DialogTrigger asChild>
-                <button type="button" className="group w-full text-left" aria-label={`Open ${project.title}`}>
+                <button
+                  type="button"
+                  className="group w-full text-left"
+                  aria-label={`Open ${project.title}`}
+                >
                   <article
                     className={cn(
                       "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500 ease-out",
@@ -114,7 +125,9 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
               </DialogTrigger>
               <DialogContent className="max-w-lg overflow-hidden border-none bg-black p-0">
                 <DialogTitle className="sr-only">{project.title}</DialogTitle>
-                <DialogDescription className="sr-only">Short-form client video.</DialogDescription>
+                <DialogDescription className="sr-only">
+                  Short-form client video.
+                </DialogDescription>
                 <div className="relative aspect-[9/16] w-full">
                   <iframe
                     className="h-full w-full"
@@ -136,67 +149,129 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
   );
 };
 
-const ProjectSection = ({ project, tone }: { project: ClientProject; tone: "light" | "dark" }) => (
-  <section className={cn("border-b border-border py-16 md:py-20", tone === "dark" ? "bg-card" : "bg-background")}>
+const ProjectSection = ({
+  project,
+  tone,
+  isOpen,
+  onToggle,
+}: {
+  project: ClientProject;
+  tone: "light" | "dark";
+  isOpen: boolean;
+  onToggle: () => void;
+}) => (
+  <section className={cn("py-6 md:py-8", tone === "dark" ? "bg-card" : "bg-background")}>
     <div className="container px-4">
-      <div className={cn(
-        "overflow-hidden rounded-[2rem] border px-5 py-6 shadow-[0_20px_70px_rgba(0,0,0,0.12)] md:px-8 md:py-8",
-        tone === "dark" ? "border-white/8 bg-background/35" : "border-border bg-card/70"
-      )}>
-      <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <div>
-          <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">Client Project</span>
-          <h3 className="mt-2 font-display text-3xl font-bold uppercase tracking-tight md:text-5xl">
-            {project.title}
-          </h3>
-        </div>
-        <a href={`https://www.youtube.com/watch?v=${project.mainEmbedId}`} target="_blank" rel="noopener noreferrer">
-          <Button size="lg" className="rounded-none text-sm font-bold uppercase tracking-widest md:text-base">
-            Watch Main Video <ExternalLink className="ml-2 h-4 w-4" />
-          </Button>
-        </a>
-      </div>
+      <div
+        className={cn(
+          "overflow-hidden rounded-[2rem] border shadow-[0_20px_70px_rgba(0,0,0,0.14)] transition-all duration-500",
+          tone === "dark" ? "border-white/8 bg-background/35" : "border-border bg-card/70"
+        )}
+      >
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={isOpen}
+          className="flex w-full items-center justify-between gap-6 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-8 md:py-7"
+        >
+          <div className="min-w-0">
+            <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+              Client Project
+            </span>
+            <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
+              <h3 className="font-display text-3xl font-bold uppercase tracking-tight md:text-5xl">
+                {project.title}
+              </h3>
+              <span className="rounded-full border border-border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground">
+                {project.shorts.length} Shorts
+              </span>
+            </div>
+          </div>
 
-      <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-center">
-        <div className="overflow-hidden rounded-[1.5rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
-          <div className="relative aspect-video w-full">
-            <iframe
-              className="h-full w-full"
-              src={`https://www.youtube.com/embed/${project.mainEmbedId}?rel=0&vq=hd1080`}
-              title={project.mainVideoTitle}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+          <div className="flex shrink-0 items-center gap-3">
+            <span className="hidden rounded-full border border-border px-4 py-2 font-mono text-[10px] uppercase tracking-[0.32em] text-muted-foreground md:inline-flex">
+              {isOpen ? "Close Project" : "Open Project"}
+            </span>
+            <span
+              className={cn(
+                "flex h-12 w-12 items-center justify-center rounded-full border border-border bg-background/80 transition-transform duration-300",
+                isOpen ? "rotate-180" : "rotate-0"
+              )}
+            >
+              <ChevronDown className="h-5 w-5" />
+            </span>
+          </div>
+        </button>
+
+        <div
+          className={cn(
+            "grid transition-all duration-500 ease-out",
+            isOpen ? "grid-rows-[1fr] border-t border-border/80" : "grid-rows-[0fr]"
+          )}
+        >
+          <div className="overflow-hidden">
+            <div className="px-5 pb-5 pt-1 md:px-8 md:pb-8">
+              <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-center">
+                <div className="overflow-hidden rounded-[1.5rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+                  <div className="relative aspect-video w-full">
+                    <iframe
+                      className="h-full w-full"
+                      src={`https://www.youtube.com/embed/${project.mainEmbedId}?rel=0&vq=hd1080`}
+                      title={project.mainVideoTitle}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <div className="rounded-[1.5rem] border border-border bg-black/10 p-6">
+                    <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-secondary">
+                      Main Video
+                    </span>
+                    <h4 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                      {project.mainVideoTitle}
+                    </h4>
+                  </div>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${project.mainEmbedId}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Button size="lg" className="w-full rounded-none text-sm font-bold uppercase tracking-widest md:text-base">
+                      Watch Main Video <ExternalLink className="ml-2 h-4 w-4" />
+                    </Button>
+                  </a>
+                </div>
+              </div>
+
+              <div className="mt-8 overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
+                <div className="mb-5 flex items-end justify-between gap-4">
+                  <div>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                      Shorts
+                    </span>
+                    <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                      Short-Form Cuts
+                    </h4>
+                  </div>
+                </div>
+                <div className="mx-auto w-full max-w-6xl px-0 md:px-8">
+                  <ShortsCarousel items={project.shorts} />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div className="rounded-[1.5rem] border border-border bg-black/10 p-6">
-          <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-secondary">Main Video</span>
-          <h4 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
-            {project.mainVideoTitle}
-          </h4>
-        </div>
-      </div>
-
-      <div className="mt-10 overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
-        <div className="mb-5 flex items-end justify-between gap-4">
-          <div>
-            <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">Shorts</span>
-            <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
-              Short-Form Cuts
-            </h4>
-          </div>
-        </div>
-        <div className="mx-auto w-full max-w-6xl px-0 md:px-8">
-          <ShortsCarousel items={project.shorts} />
-        </div>
-      </div>
       </div>
     </div>
   </section>
 );
 
 export default function Portfolio() {
+  const [openProject, setOpenProject] = useState("FIBERSCOPE | MEDITINC");
+
   const featuredVideo = {
     title: "Supplement King Promo",
     category: "Viral Short-Form",
@@ -251,16 +326,15 @@ export default function Portfolio() {
   ];
 
   return (
-    <div className="flex flex-col w-full">
-      <section className="border-b border-border bg-background pt-32 pb-20">
+    <div className="flex w-full flex-col">
+      <section className="border-b border-border bg-background pb-20 pt-32">
         <div className="container px-4">
           <h1 className="mb-6 font-display text-6xl font-bold uppercase tracking-tighter md:text-8xl">
             Our <span className="text-primary">Work</span>
           </h1>
-            <p className="max-w-2xl border-l-4 border-secondary pl-6 font-mono text-base text-muted-foreground md:text-lg">
+          <p className="max-w-2xl border-l-4 border-secondary pl-6 font-mono text-base text-muted-foreground md:text-lg">
             Main videos and short-form cuts from real client campaigns.
           </p>
-
         </div>
       </section>
 
@@ -286,7 +360,11 @@ export default function Portfolio() {
               <h2 className="mb-4 font-display text-4xl font-bold uppercase tracking-tighter md:text-6xl">
                 {featuredVideo.title}
               </h2>
-              <a href={`https://youtube.com/shorts/${featuredVideo.embedId}`} target="_blank" rel="noopener noreferrer">
+              <a
+                href={`https://youtube.com/shorts/${featuredVideo.embedId}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Button size="lg" className="rounded-none text-sm font-bold uppercase tracking-widest md:text-base">
                   Watch on YouTube <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
@@ -304,13 +382,19 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {projects.map((project, index) => (
-        <ProjectSection
-          key={project.title}
-          project={project}
-          tone={index % 2 === 0 ? "light" : "dark"}
-        />
-      ))}
+      <div className="border-b border-border bg-background py-6 md:py-8">
+        {projects.map((project, index) => (
+          <ProjectSection
+            key={project.title}
+            project={project}
+            tone={index % 2 === 0 ? "light" : "dark"}
+            isOpen={openProject === project.title}
+            onToggle={() =>
+              setOpenProject((current) => (current === project.title ? "" : project.title))
+            }
+          />
+        ))}
+      </div>
     </div>
   );
 }
