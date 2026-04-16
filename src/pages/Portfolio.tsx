@@ -36,23 +36,21 @@ const YouTubeBadge = ({ active }: { active: boolean }) => (
   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
     <span
       className={cn(
-        "relative flex h-[2.95rem] w-[4.1rem] items-center justify-center overflow-hidden rounded-[1rem] border border-white/12 bg-[#ff0033] transition-all duration-300",
+        "relative flex h-[2.7rem] w-[3.95rem] items-center justify-center overflow-hidden rounded-[0.95rem] border border-white/10 bg-[#ff0033] transition-all duration-300",
         active
-          ? "shadow-[0_0_18px_rgba(255,0,51,0.32)] group-hover:scale-[1.05] group-hover:shadow-[0_0_26px_rgba(255,0,51,0.45)] group-active:scale-[1.02]"
-          : "scale-95 opacity-80 shadow-[0_0_8px_rgba(255,0,51,0.1)]"
+          ? "shadow-[0_0_18px_rgba(255,0,51,0.3)] group-hover:scale-[1.04] group-hover:shadow-[0_0_24px_rgba(255,0,51,0.42)] group-active:scale-[1.02]"
+          : "scale-95 opacity-82 shadow-[0_0_8px_rgba(255,0,51,0.12)]"
       )}
     >
       <span
         className={cn(
-          "absolute inset-y-0 left-[-40%] w-[32%] -skew-x-[18deg] bg-white/20 blur-md transition-transform duration-500",
-          active ? "group-hover:translate-x-[315%]" : "translate-x-0 opacity-0"
+          "absolute inset-y-0 left-[-42%] w-[34%] -skew-x-[18deg] bg-white/18 blur-md transition-transform duration-500",
+          active ? "group-hover:translate-x-[320%]" : "translate-x-0 opacity-0"
         )}
       />
-      <span className="relative z-10 flex h-[1.22rem] w-[1.9rem] items-center justify-center rounded-[0.45rem] bg-white/14">
-        <svg viewBox="0 0 20 14" aria-hidden="true" className="h-[0.92rem] w-[0.92rem] fill-white">
-          <path d="M7 3.2v7.6L13.6 7 7 3.2Z" />
-        </svg>
-      </span>
+      <svg viewBox="0 0 36 24" aria-hidden="true" className="relative z-10 h-[1rem] w-[1rem] fill-white drop-shadow-[0_1px_1px_rgba(0,0,0,0.18)]">
+        <path d="M13.2 6.2v11.6L23.6 12 13.2 6.2Z" />
+      </svg>
     </span>
   </div>
 );
@@ -182,7 +180,7 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
         {loopedItems.map((project, index) => (
           <CarouselItem
             key={`${project.embedId}-${index}`}
-            className="pl-4 basis-[72%] sm:basis-[56%] lg:basis-[38%] xl:basis-[30%]"
+            className="pl-4 basis-[78%] sm:basis-1/2 lg:basis-1/3 xl:basis-1/3"
           >
             <ShortCard project={project} isActive={index === current} />
           </CarouselItem>
