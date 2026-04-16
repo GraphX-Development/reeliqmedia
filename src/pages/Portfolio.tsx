@@ -368,10 +368,10 @@ export default function Portfolio() {
       </section>
 
       <section className="border-b border-border bg-card py-24 md:py-28">
-        <div className="container max-w-[96rem] px-4">
-          <div className="mx-auto grid min-h-[44rem] items-center gap-12 rounded-[2.5rem] border border-white/8 bg-background/40 px-6 py-8 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:px-10 md:py-12 lg:grid-cols-[minmax(0,500px)_minmax(0,1fr)] lg:gap-24 xl:grid-cols-[minmax(0,560px)_minmax(0,1fr)] xl:px-14">
-            <div className="w-full">
-              <div className="relative mx-auto aspect-[9/16] max-w-[34rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
+        <div className="container max-w-[108rem] px-4">
+          <div className="mx-auto grid min-h-[46rem] items-center gap-14 rounded-[2.7rem] border border-white/8 bg-background/40 px-6 py-8 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:px-10 md:py-12 lg:grid-cols-[minmax(0,420px)_minmax(0,1fr)] lg:gap-28 xl:grid-cols-[minmax(0,460px)_minmax(0,1fr)] xl:px-16">
+            <div className="w-full lg:justify-self-start lg:-ml-4 xl:-ml-8">
+              <div className="relative mx-auto aspect-[9/16] max-w-[27rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
                 <iframe
                   className="h-full w-full"
                   src={`https://www.youtube.com/embed/${featuredVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
@@ -382,11 +382,11 @@ export default function Portfolio() {
                 />
               </div>
             </div>
-            <div className="w-full max-w-3xl pl-0 lg:pl-4 xl:pl-8">
-              <span className="mb-5 block font-mono text-sm uppercase tracking-widest text-primary md:text-base">
+            <div className="w-full max-w-[44rem] pl-0 lg:pl-2 xl:pl-4">
+              <span className="mb-4 block font-mono text-xs uppercase tracking-[0.32em] text-primary md:text-sm">
                 {featuredVideo.category}
               </span>
-              <h2 className="mb-8 font-display text-5xl font-bold uppercase tracking-tighter md:text-7xl xl:text-[6.2rem]">
+              <h2 className="mb-7 font-display text-4xl font-bold uppercase tracking-tighter md:text-6xl xl:text-[4.9rem]">
                 {featuredVideo.title}
               </h2>
               <a
@@ -394,7 +394,7 @@ export default function Portfolio() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button size="lg" className="rounded-none px-8 text-sm font-bold uppercase tracking-widest md:h-14 md:text-base">
+                <Button size="lg" className="rounded-none px-7 text-xs font-bold uppercase tracking-[0.28em] md:h-13 md:text-sm">
                   Watch on YouTube <ExternalLink className="ml-2 h-4 w-4" />
                 </Button>
               </a>
