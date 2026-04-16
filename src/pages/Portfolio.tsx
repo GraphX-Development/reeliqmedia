@@ -209,7 +209,14 @@ const ProjectSection = ({
         >
           <div className="overflow-hidden">
             <div className="px-5 pb-5 pt-1 md:px-8 md:pb-8">
-              <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-center">
+              <div className="overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
+                <div className="mb-5 flex items-end justify-between gap-4">
+                  <div>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                      Horizontal Video
+                    </span>
+                  </div>
+                </div>
                 <div className="overflow-hidden rounded-[1.5rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
                   <div className="relative aspect-video w-full">
                     <iframe
@@ -222,29 +229,9 @@ const ProjectSection = ({
                     />
                   </div>
                 </div>
-
-                <div className="flex flex-col gap-4">
-                  <div className="rounded-[1.5rem] border border-border bg-black/10 p-6">
-                    <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-secondary">
-                      Main Video
-                    </span>
-                    <h4 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
-                      {project.mainVideoTitle}
-                    </h4>
-                  </div>
-                  <a
-                    href={`https://www.youtube.com/watch?v=${project.mainEmbedId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Button size="lg" className="w-full rounded-none text-sm font-bold uppercase tracking-widest md:text-base">
-                      Watch Main Video <ExternalLink className="ml-2 h-4 w-4" />
-                    </Button>
-                  </a>
-                </div>
               </div>
 
-              <div className="mt-8 overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
+              <div className="mt-6 overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
                 <div className="mb-5 flex items-end justify-between gap-4">
                   <div>
                     <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
