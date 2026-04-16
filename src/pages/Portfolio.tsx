@@ -32,16 +32,124 @@ type ClientProject = {
   shorts: ShortVideo[];
 };
 
-const YouTubeBadge = () => (
+const YouTubeBadge = ({ active }: { active: boolean }) => (
   <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-    <span className="flex h-18 w-18 items-center justify-center rounded-[1.6rem] border border-white/15 bg-[#ff0033] shadow-[0_0_0_rgba(255,0,51,0)] transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_36px_rgba(255,0,51,0.55)] group-active:scale-105 group-active:shadow-[0_0_42px_rgba(255,0,51,0.6)]">
-      <span
-        className="ml-1 block h-0 w-0 border-y-[12px] border-y-transparent border-l-[18px] border-l-white"
+    <span
+      className={cn(
+        "flex h-[4.6rem] w-[4.6rem] items-center justify-center rounded-[1.75rem] border transition-all duration-300",
+        active
+          ? "border-white/20 bg-[#ff0033] shadow-[0_0_34px_rgba(255,0,51,0.45)] group-hover:scale-110 group-hover:shadow-[0_0_44px_rgba(255,0,51,0.62)] group-active:scale-105"
+          : "border-white/10 bg-[#ff0033]/70 shadow-none"
+      )}
+    >
+      <svg
+        viewBox="0 0 24 24"
         aria-hidden="true"
-      />
+        className={cn("h-9 w-9 transition-transform duration-300", active ? "scale-100" : "scale-95 opacity-90")}
+        fill="none"
+      >
+        <path
+          d="M15.6 3.7c1 0 1.9.52 2.38 1.36l.7 1.22a2.75 2.75 0 0 0 1.38 1.17l1.4.56c.97.39 1.59 1.33 1.59 2.37 0 1.03-.62 1.97-1.6 2.36l-1.39.56a2.75 2.75 0 0 0-1.37 1.18l-.71 1.22a2.74 2.74 0 0 1-2.38 1.36c-1 0-1.9-.52-2.38-1.36l-.7-1.22a2.75 2.75 0 0 0-1.38-1.18l-1.4-.56a2.54 2.54 0 0 1-1.59-2.36c0-1.04.62-1.98 1.6-2.37l1.39-.56a2.75 2.75 0 0 0 1.37-1.17l.71-1.22A2.74 2.74 0 0 1 15.6 3.7Z"
+          fill="white"
+          transform="rotate(90 12 12)"
+        />
+        <path d="M11 9.4 15.6 12 11 14.6V9.4Z" fill="#ff0033" />
+      </svg>
     </span>
   </div>
 );
+
+const ShortCard = ({
+  project,
+  isActive,
+}: {
+  project: ShortVideo;
+  isActive: boolean;
+}) => {
+  const card = (
+    <article
+      className={cn(
+        "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500 ease-out",
+        isActive
+          ? "scale-100 opacity-100 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
+          : "scale-[0.88] opacity-55 blur-[1px]"
+      )}
+    >
+      <div className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black">
+        <img
+          src={`https://img.youtube.com/vi/${project.embedId}/maxresdefault.jpg`}
+          alt={project.title}
+          className={cn(
+            "h-full w-full object-cover transition-transform duration-700",
+            isActive ? "group-hover:scale-105" : ""
+          )}
+          onError={(e) => {
+            e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`;
+          }}
+        />
+        <div
+          className={cn(
+            "absolute inset-0 transition-all duration-300",
+            isActive
+              ? "bg-gradient-to-b from-black/60 via-black/10 to-black/75"
+              : "bg-gradient-to-b from-black/70 via-black/28 to-black/85"
+          )}
+        />
+        <div className="absolute inset-x-0 top-0 p-5">
+          <span
+            className={cn(
+              "font-mono text-[10px] uppercase tracking-[0.35em] transition-all duration-300",
+              isActive
+                ? "text-primary drop-shadow-[0_0_16px_rgba(7,130,255,0.28)]"
+                : "text-primary/60"
+            )}
+          >
+            {project.category}
+          </span>
+          <h4
+            className={cn(
+              "mt-2 max-w-[11rem] font-display text-2xl font-bold uppercase tracking-tight transition-all duration-300",
+              isActive
+                ? "text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)]"
+                : "text-white/72"
+            )}
+          >
+            {project.title}
+          </h4>
+        </div>
+        <YouTubeBadge active={isActive} />
+      </div>
+    </article>
+  );
+
+  if (!isActive) {
+    return <div className="group block w-full cursor-default select-none text-left">{card}</div>;
+  }
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <button type="button" className="group w-full text-left" aria-label={`Open ${project.title}`}>
+          {card}
+        </button>
+      </DialogTrigger>
+      <DialogContent className="max-w-lg overflow-hidden border-none bg-black p-0">
+        <DialogTitle className="sr-only">{project.title}</DialogTitle>
+        <DialogDescription className="sr-only">Short-form client video.</DialogDescription>
+        <div className="relative aspect-[9/16] w-full">
+          <iframe
+            className="h-full w-full"
+            src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&vq=hd1080`}
+            title={project.title}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
 
 const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
   const [api, setApi] = useState<CarouselApi>();
@@ -77,61 +185,7 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
             key={`${project.embedId}-${index}`}
             className="pl-4 basis-[78%] sm:basis-[62%] lg:basis-[42%] xl:basis-[34%]"
           >
-            <Dialog>
-              <DialogTrigger asChild>
-                <button
-                  type="button"
-                  className="group w-full text-left"
-                  aria-label={`Open ${project.title}`}
-                >
-                  <article
-                    className={cn(
-                      "overflow-hidden rounded-[1.5rem] border border-border bg-card transition-all duration-500 ease-out",
-                      index === current
-                        ? "scale-100 opacity-100 shadow-[0_24px_70px_rgba(0,0,0,0.28)]"
-                        : "scale-[0.88] opacity-55 blur-[1px] hover:scale-[0.92] hover:opacity-80"
-                    )}
-                  >
-                    <div className="relative aspect-[9/16] overflow-hidden rounded-[1.5rem] bg-black">
-                      <img
-                        src={`https://img.youtube.com/vi/${project.embedId}/maxresdefault.jpg`}
-                        alt={project.title}
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                        onError={(e) => {
-                          e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`;
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/10 to-black/75" />
-                      <div className="absolute inset-x-0 top-0 p-5">
-                        <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-primary drop-shadow-[0_0_16px_rgba(7,130,255,0.28)]">
-                          {project.category}
-                        </span>
-                        <h4 className="mt-2 max-w-[11rem] font-display text-2xl font-bold uppercase tracking-tight text-white drop-shadow-[0_10px_24px_rgba(0,0,0,0.55)]">
-                          {project.title}
-                        </h4>
-                      </div>
-                      <YouTubeBadge />
-                    </div>
-                  </article>
-                </button>
-              </DialogTrigger>
-              <DialogContent className="max-w-lg overflow-hidden border-none bg-black p-0">
-                <DialogTitle className="sr-only">{project.title}</DialogTitle>
-                <DialogDescription className="sr-only">
-                  Short-form client video.
-                </DialogDescription>
-                <div className="relative aspect-[9/16] w-full">
-                  <iframe
-                    className="h-full w-full"
-                    src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&vq=hd1080`}
-                    title={project.title}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  />
-                </div>
-              </DialogContent>
-            </Dialog>
+            <ShortCard project={project} isActive={index === current} />
           </CarouselItem>
         ))}
       </CarouselContent>
