@@ -6,8 +6,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
@@ -41,15 +39,29 @@ const ShortCard = ({
     )}
   >
     <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
-      <iframe
-        className="h-full w-full"
-        src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-        title={project.title}
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowFullScreen
-      />
-      {!isActive ? <div className="pointer-events-none absolute inset-0 bg-black/28" /> : null}
+      {isActive ? (
+        <iframe
+          className="h-full w-full"
+          src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+          title={project.title}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      ) : (
+        <>
+          <img
+            src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
+            alt={project.title}
+            className="h-full w-full object-cover"
+            loading="lazy"
+            onError={(e) => {
+              e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
+            }}
+          />
+          <div className="pointer-events-none absolute inset-0 bg-black/38" />
+        </>
+      )}
     </div>
   </article>
 );
@@ -82,18 +94,16 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
       }}
       className="w-full"
     >
-      <CarouselContent className="-ml-4 py-4 md:py-8">
+      <CarouselContent className="-ml-4 py-4 md:py-8 cursor-grab active:cursor-grabbing">
         {loopedItems.map((project, index) => (
           <CarouselItem
             key={`${project.embedId}-${index}`}
-            className="pl-4 basis-[82%] sm:basis-[56%] lg:basis-[34%] xl:basis-[34%]"
+            className="pl-4 basis-[82%] select-none sm:basis-[56%] lg:basis-[34%] xl:basis-[34%]"
           >
             <ShortCard project={project} isActive={index === current} />
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden md:flex -left-6 border-border bg-background/90 backdrop-blur" />
-      <CarouselNext className="hidden md:flex -right-6 border-border bg-background/90 backdrop-blur" />
     </Carousel>
   );
 };
