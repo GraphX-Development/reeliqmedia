@@ -243,8 +243,10 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
   return (
     <div className="space-y-5">
       <div className="space-y-4 md:hidden">
-        <div className="overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl">
-          <div className="relative aspect-video w-full overflow-hidden">
+        <div className="relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.04] pt-3 pb-4 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-3 bg-[linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.1))] backdrop-blur-md" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-4 bg-[linear-gradient(0deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] backdrop-blur-md" />
+          <div className="relative aspect-video w-full overflow-hidden bg-black">
             <iframe
               className="absolute inset-0 h-full w-full"
               src={`https://www.youtube.com/embed/${activeVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
@@ -253,8 +255,6 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-14 bg-[linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.08)_48%,transparent)] backdrop-blur-md" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-[linear-gradient(0deg,rgba(255,255,255,0.22),rgba(255,255,255,0.05)_45%,transparent)] backdrop-blur-md" />
           </div>
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2">
@@ -272,7 +272,10 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
                     : "border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]"
                 )}
               >
-                <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80">
+                <span className={cn("block font-mono text-xs font-bold tracking-[0.28em]", isActive ? "text-primary" : "text-white/38")}>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80">
                   {video.spineLabel}
                 </span>
                 <span className="mt-2 block text-sm font-semibold leading-tight text-white/92">
@@ -296,23 +299,30 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
       <div className="hidden md:block [perspective:2400px]">
         <div className="flex min-h-[29rem] items-stretch gap-4 overflow-visible rounded-[1.8rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-4 shadow-[0_22px_64px_rgba(0,0,0,0.2)] [transform-style:preserve-3d] xl:p-5">
           <div className="flex min-w-0 flex-[1.55] flex-col overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
-            <div className="relative aspect-video w-full overflow-hidden rounded-none bg-transparent">
-              <iframe
-                key={activeVideo.embedId}
-                className="absolute inset-0 h-full w-full"
-                src={`https://www.youtube.com/embed/${activeVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-                title={activeVideo.title}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08)_46%,transparent)] backdrop-blur-lg" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-[linear-gradient(0deg,rgba(255,255,255,0.24),rgba(255,255,255,0.06)_42%,transparent)] backdrop-blur-lg" />
+            <div className="relative overflow-hidden pt-4 pb-5">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-4 bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] backdrop-blur-lg" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-5 bg-[linear-gradient(0deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] backdrop-blur-lg" />
+              <div className="relative aspect-video w-full overflow-hidden bg-black">
+                <iframe
+                  key={activeVideo.embedId}
+                  className="absolute inset-0 h-full w-full"
+                  src={`https://www.youtube.com/embed/${activeVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+                  title={activeVideo.title}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                />
+              </div>
             </div>
             <div className="grid min-w-0 gap-4 border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] p-5 xl:grid-cols-[minmax(0,0.34fr)_minmax(0,1fr)] xl:items-start xl:p-6">
-              <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-primary xl:pt-1">
-                {activeVideo.spineLabel}
-              </p>
+              <div className="flex items-center gap-3 xl:pt-1">
+                <span className="font-mono text-sm font-bold tracking-[0.28em] text-primary">
+                  01
+                </span>
+                <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-primary">
+                  {activeVideo.spineLabel}
+                </p>
+              </div>
               <div className="min-w-0">
                 <h5 className="font-display text-[2rem] font-bold uppercase leading-[0.95] tracking-tight text-white xl:text-[2.35rem]">
                   {activeVideo.title}
@@ -338,6 +348,9 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
                   <div className="absolute inset-y-[6%] left-[0.42rem] w-[2px] rounded-full bg-white/35 blur-[0.5px]" />
                   <div className="absolute inset-y-[10%] right-0 w-[1px] bg-black/30" />
                   <div className="flex min-h-full w-full flex-col justify-between rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-5">
+                    <span className="font-mono text-[0.78rem] font-bold tracking-[0.28em] text-white/38 [text-orientation:mixed] [writing-mode:vertical-rl]">
+                      {String(swapIndex + 1).padStart(2, "0")}
+                    </span>
                     <span className="font-mono text-[0.68rem] uppercase tracking-[0.34em] text-primary/90 [text-orientation:mixed] [writing-mode:vertical-rl]">
                       {video.spineLabel}
                     </span>
