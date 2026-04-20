@@ -6,6 +6,8 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
   type CarouselApi,
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
@@ -104,6 +106,8 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
+      <CarouselPrevious className="left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 border-white/12 bg-black/70 text-white shadow-[0_14px_30px_rgba(0,0,0,0.3)] backdrop-blur md:flex" />
+      <CarouselNext className="right-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 border-white/12 bg-black/70 text-white shadow-[0_14px_30px_rgba(0,0,0,0.3)] backdrop-blur md:flex" />
     </Carousel>
   );
 };
@@ -124,33 +128,35 @@ const ProjectSection = ({
           type="button"
           onClick={onToggle}
           aria-expanded={isOpen}
-          className="flex w-full items-center justify-between gap-6 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:px-8 md:py-7"
+          className="flex w-full flex-col items-start gap-5 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-7"
         >
-          <div className="min-w-0">
+          <div className="min-w-0 max-w-4xl">
             <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
               Client Project
             </span>
             <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
-              <h3 className="font-display text-3xl font-bold uppercase tracking-tight md:text-5xl">
+              <h3 className="font-display text-[2.35rem] font-bold uppercase leading-[0.95] tracking-tight sm:text-[2.85rem] md:text-5xl">
                 {project.title}
               </h3>
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center">
-            <span className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-3 py-3 text-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] backdrop-blur-md transition-all duration-300 md:px-4">
-              <span
-                className={cn(
-                  "h-2.5 w-2.5 rounded-full transition-all duration-300",
-                  isOpen ? "bg-primary shadow-[0_0_18px_rgba(7,130,255,0.65)]" : "bg-white/35"
-                )}
-              />
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/88">
-                {isOpen ? "Close Portfolio" : "Open Portfolio"}
+          <div className="flex w-full shrink-0 items-center md:w-auto">
+            <span className="inline-flex w-full items-center justify-between gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] backdrop-blur-md transition-all duration-300 md:w-auto md:px-4">
+              <span className="flex items-center gap-3">
+                <span
+                  className={cn(
+                    "h-2.5 w-2.5 rounded-full transition-all duration-300",
+                    isOpen ? "bg-primary shadow-[0_0_18px_rgba(7,130,255,0.65)]" : "bg-white/35"
+                  )}
+                />
+                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/88 sm:text-[11px]">
+                  {isOpen ? "Close Portfolio" : "Open Portfolio"}
+                </span>
               </span>
               <span
                 className={cn(
-                  "flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-black/30 transition-all duration-300",
+                  "flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/30 transition-all duration-300",
                   isOpen ? "rotate-180 bg-primary/15 text-primary" : "rotate-0 text-white/80"
                 )}
               >
@@ -168,41 +174,43 @@ const ProjectSection = ({
         >
           <div className="overflow-hidden">
             <div className="px-5 pb-5 pt-1 md:px-8 md:pb-8">
-              <div className="overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
-                <div className="mb-5 flex items-end justify-between gap-4">
-                  <div>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
-                      Horizontal Video
-                    </span>
+              <div className="rounded-[1.75rem] bg-black/10 px-3 py-5 md:px-5 md:py-6">
+                <div>
+                  <div className="mb-5 flex items-end justify-between gap-4">
+                    <div>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                        Horizontal Video
+                      </span>
+                    </div>
+                  </div>
+                  <div className="mx-auto max-w-5xl overflow-hidden rounded-[1.35rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+                    <div className="relative aspect-video w-full">
+                        <iframe
+                          className="h-full w-full"
+                          src={`https://www.youtube.com/embed/${project.mainEmbedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+                          title={project.mainVideoTitle}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                    </div>
                   </div>
                 </div>
-                <div className="mx-auto max-w-5xl overflow-hidden rounded-[1.35rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
-                  <div className="relative aspect-video w-full">
-                      <iframe
-                        className="h-full w-full"
-                        src={`https://www.youtube.com/embed/${project.mainEmbedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-                        title={project.mainVideoTitle}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
-                  </div>
-                </div>
-              </div>
 
-              <div className="mt-6 overflow-hidden rounded-[1.75rem] border border-border/80 bg-black/10 px-3 py-5 md:px-5 md:py-6">
-                <div className="mb-5 flex items-end justify-between gap-4">
-                  <div>
-                    <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
-                      Shorts
-                    </span>
-                    <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
-                      Short-Form Cuts
-                    </h4>
+                <div className="mt-8">
+                  <div className="mb-5 flex items-end justify-between gap-4">
+                    <div>
+                      <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                        Shorts
+                      </span>
+                      <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                        Short-Form Cuts
+                      </h4>
+                    </div>
                   </div>
-                </div>
-                <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
-                  <ShortsCarousel items={project.shorts} />
+                  <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
+                    <ShortsCarousel items={project.shorts} />
+                  </div>
                 </div>
               </div>
             </div>
