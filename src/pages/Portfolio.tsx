@@ -252,11 +252,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
     <div className="space-y-5">
       <div className="space-y-4 md:hidden">
         <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
-          <div className="relative overflow-hidden pt-5 pb-6">
-            <div className="pointer-events-none absolute inset-x-0 top-0 h-5 bg-[linear-gradient(180deg,rgba(255,255,255,0.52),rgba(255,255,255,0.18)_42%,rgba(120,190,255,0.08))] opacity-95 backdrop-blur-xl" />
-            <div className="pointer-events-none absolute left-[12%] top-0 h-10 w-[38%] rounded-full bg-white/35 blur-2xl" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-[linear-gradient(0deg,rgba(255,255,255,0.4),rgba(255,255,255,0.12)_48%,rgba(120,190,255,0.04))] opacity-90 backdrop-blur-xl" />
-            <div className="pointer-events-none absolute bottom-0 right-[14%] h-10 w-[34%] rounded-full bg-sky-200/20 blur-2xl" />
+          <div className="relative overflow-hidden">
             <div className="relative aspect-video w-full overflow-hidden bg-black">
               <iframe
                 className="absolute inset-0 h-full w-full"
@@ -285,7 +281,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
             </div>
           </div>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
+        <div className="grid gap-2.5 sm:grid-cols-2">
           {shelfVideos.map((video) => {
             const swapIndex = orderedVideos.findIndex((entry) => entry.embedId === video.embedId);
             return (
@@ -293,19 +289,19 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
                 key={video.embedId}
                 type="button"
                 onClick={() => bringToFront(swapIndex)}
-                className="group relative flex min-h-[7.25rem] w-full cursor-pointer items-stretch overflow-hidden rounded-[1.2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))] text-left shadow-[0_22px_45px_rgba(0,0,0,0.22)] transition-all duration-500 ease-out hover:border-primary/45 hover:shadow-[0_24px_55px_rgba(7,130,255,0.18)]"
+                className="group relative flex min-h-[5.9rem] w-full cursor-pointer items-stretch overflow-hidden rounded-[1.05rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))] text-left shadow-[0_18px_34px_rgba(0,0,0,0.2)] transition-all duration-500 ease-out hover:border-primary/45 hover:shadow-[0_22px_42px_rgba(7,130,255,0.16)]"
               >
-                <div className="absolute inset-x-[6%] top-[0.42rem] h-[2px] rounded-full bg-white/35 blur-[0.5px]" />
+                <div className="absolute inset-x-[6%] top-[0.38rem] h-[2px] rounded-full bg-white/35 blur-[0.5px]" />
                 <div className="absolute inset-x-[10%] bottom-0 h-[1px] bg-black/30" />
-                <div className="flex min-h-full w-full items-start gap-3 rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-4">
-                  <span className="shrink-0 font-mono text-[0.78rem] font-bold tracking-[0.28em] text-white/38">
+                <div className="flex min-h-full w-full items-start gap-3 rounded-[0.95rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-3">
+                  <span className="shrink-0 font-mono text-[0.72rem] font-bold tracking-[0.24em] text-white/38">
                     {getFixedVideoNumber(video)}
                   </span>
                   <div className="min-w-0">
-                    <span className="block font-mono text-[0.64rem] uppercase tracking-[0.3em] text-primary/90">
+                    <span className="block font-mono text-[0.58rem] uppercase tracking-[0.26em] text-primary/90">
                       {video.spineLabel}
                     </span>
-                    <span className="mt-2 block font-mono text-[0.62rem] uppercase tracking-[0.2em] text-white/46">
+                    <span className="mt-1.5 block font-mono text-[0.56rem] uppercase tracking-[0.16em] text-white/46">
                       {video.title}
                     </span>
                   </div>
