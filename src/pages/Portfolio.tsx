@@ -285,29 +285,30 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
             </div>
           </div>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2 [transform-style:preserve-3d]">
-          {shelfVideos.map((video, shelfIndex) => {
+        <div className="grid gap-3 sm:grid-cols-2">
+          {shelfVideos.map((video) => {
             const swapIndex = orderedVideos.findIndex((entry) => entry.embedId === video.embedId);
             return (
               <button
                 key={video.embedId}
                 type="button"
                 onClick={() => bringToFront(swapIndex)}
-                className="group relative flex h-[9.75rem] w-[4.85rem] shrink-0 cursor-pointer items-stretch overflow-visible rounded-[1.2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))] text-left shadow-[0_22px_45px_rgba(0,0,0,0.22)] transition-all duration-500 ease-out hover:border-primary/45 hover:shadow-[0_24px_55px_rgba(7,130,255,0.18)]"
-                style={{ transform: `rotateY(-18deg) translateZ(${10 - shelfIndex * 4}px)` }}
+                className="group relative flex min-h-[7.25rem] w-full cursor-pointer items-stretch overflow-hidden rounded-[1.2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))] text-left shadow-[0_22px_45px_rgba(0,0,0,0.22)] transition-all duration-500 ease-out hover:border-primary/45 hover:shadow-[0_24px_55px_rgba(7,130,255,0.18)]"
               >
-                <div className="absolute inset-y-[6%] left-[0.42rem] w-[2px] rounded-full bg-white/35 blur-[0.5px]" />
-                <div className="absolute inset-y-[10%] right-0 w-[1px] bg-black/30" />
-                <div className="flex min-h-full w-full flex-col justify-between rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-4">
-                  <span className="font-mono text-[0.78rem] font-bold tracking-[0.28em] text-white/38 [text-orientation:mixed] [writing-mode:vertical-rl]">
+                <div className="absolute inset-x-[6%] top-[0.42rem] h-[2px] rounded-full bg-white/35 blur-[0.5px]" />
+                <div className="absolute inset-x-[10%] bottom-0 h-[1px] bg-black/30" />
+                <div className="flex min-h-full w-full items-start gap-3 rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-4">
+                  <span className="shrink-0 font-mono text-[0.78rem] font-bold tracking-[0.28em] text-white/38">
                     {getFixedVideoNumber(video)}
                   </span>
-                  <span className="font-mono text-[0.64rem] uppercase tracking-[0.3em] text-primary/90 [text-orientation:mixed] [writing-mode:vertical-rl]">
-                    {video.spineLabel}
-                  </span>
-                  <span className="font-mono text-[0.52rem] uppercase tracking-[0.24em] text-white/46 [text-orientation:mixed] [writing-mode:vertical-rl]">
-                    {video.title}
-                  </span>
+                  <div className="min-w-0">
+                    <span className="block font-mono text-[0.64rem] uppercase tracking-[0.3em] text-primary/90">
+                      {video.spineLabel}
+                    </span>
+                    <span className="mt-2 block font-mono text-[0.62rem] uppercase tracking-[0.2em] text-white/46">
+                      {video.title}
+                    </span>
+                  </div>
                 </div>
               </button>
             );
