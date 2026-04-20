@@ -60,7 +60,7 @@ const ShortCard = ({
         "overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-500 ease-out",
         isActive
           ? "scale-100 opacity-100 shadow-[0_20px_58px_rgba(0,0,0,0.24)]"
-          : "scale-[0.92] cursor-pointer opacity-60 hover:opacity-85"
+          : "scale-[0.9] cursor-pointer opacity-55 blur-[0.35px] hover:opacity-85"
       )}
     >
       <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
@@ -165,13 +165,13 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
         skipSnaps: false,
         dragFree: false,
       }}
-      className="w-full"
+      className="w-full overflow-visible px-1 sm:px-0"
     >
-      <CarouselContent className="-ml-4 py-4 md:py-8 cursor-grab active:cursor-grabbing">
+      <CarouselContent className="-ml-3 py-4 md:-ml-4 md:py-8 cursor-grab active:cursor-grabbing">
         {loopedItems.map((project, index) => (
           <CarouselItem
             key={`${project.embedId}-${index}`}
-            className="pl-4 basis-[82%] select-none sm:basis-[56%] lg:basis-[34%] xl:basis-[34%]"
+            className="pl-3 basis-[74%] select-none sm:pl-4 sm:basis-[56%] lg:basis-[34%] xl:basis-[34%]"
           >
             <ShortCard
               project={project}
@@ -183,8 +183,8 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="left-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 border-white/12 bg-black/70 text-white shadow-[0_14px_30px_rgba(0,0,0,0.3)] backdrop-blur md:flex" />
-      <CarouselNext className="right-0 top-1/2 hidden h-11 w-11 -translate-y-1/2 border-white/12 bg-black/70 text-white shadow-[0_14px_30px_rgba(0,0,0,0.3)] backdrop-blur md:flex" />
+      <CarouselPrevious className="left-1 top-1/2 flex h-8 w-8 -translate-y-1/2 border-white/12 bg-black/72 text-white shadow-[0_10px_24px_rgba(0,0,0,0.3)] backdrop-blur sm:left-2 sm:h-9 sm:w-9 md:left-0 md:h-11 md:w-11" />
+      <CarouselNext className="right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 border-white/12 bg-black/72 text-white shadow-[0_10px_24px_rgba(0,0,0,0.3)] backdrop-blur sm:right-2 sm:h-9 sm:w-9 md:right-0 md:h-11 md:w-11" />
     </Carousel>
   );
 };
