@@ -1,5 +1,5 @@
 // Design reminder: cinematic monochrome framing, crisp blue accents, compact copy, and premium motion-led portfolio blocks.
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ExternalLink } from "lucide-react";
 import {
@@ -28,50 +28,94 @@ type ClientProject = {
 const ShortCard = ({
   project,
   isActive,
+  onActivate,
+  onSwipePrev,
+  onSwipeNext,
 }: {
   project: ShortVideo;
   isActive: boolean;
-}) => (
-  <article
-    className={cn(
-      "overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-500 ease-out",
-      isActive
-        ? "scale-100 opacity-100 shadow-[0_20px_58px_rgba(0,0,0,0.24)]"
-        : "scale-[0.92] opacity-60"
-    )}
-  >
-    <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
-      {isActive ? (
-        <iframe
-          className="h-full w-full"
-          src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-          title={project.title}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        />
-      ) : (
-        <>
-          <img
-            src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
-            alt={project.title}
-            className="h-full w-full object-cover"
-            loading="lazy"
-            onError={(e) => {
-              e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
-            }}
-          />
-          <div className="pointer-events-none absolute inset-0 bg-black/38" />
-        </>
+  onActivate: () => void;
+  onSwipePrev: () => void;
+  onSwipeNext: () => void;
+}) => {
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const handledSwipeRef = useRef(false);
+
+  return (
+    <article
+      onClick={() => {
+        if (!isActive) onActivate();
+      }}
+      className={cn(
+        "overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-500 ease-out",
+        isActive
+          ? "scale-100 opacity-100 shadow-[0_20px_58px_rgba(0,0,0,0.24)]"
+          : "scale-[0.92] cursor-pointer opacity-60 hover:opacity-85"
       )}
-    </div>
-  </article>
-);
+    >
+      <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
+        {isActive ? (
+          <>
+            <iframe
+              className="h-full w-full"
+              src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+              title={project.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+            <div
+              className="absolute inset-0 z-10 md:hidden"
+              onTouchStart={(event) => {
+                const touch = event.touches[0];
+                touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+                handledSwipeRef.current = false;
+              }}
+              onTouchMove={(event) => {
+                if (!touchStartRef.current || handledSwipeRef.current) return;
+                const touch = event.touches[0];
+                const deltaX = touch.clientX - touchStartRef.current.x;
+                const deltaY = touch.clientY - touchStartRef.current.y;
+                if (Math.abs(deltaX) > 36 && Math.abs(deltaX) > Math.abs(deltaY) + 8) {
+                  handledSwipeRef.current = true;
+                  if (deltaX < 0) onSwipeNext();
+                  if (deltaX > 0) onSwipePrev();
+                }
+              }}
+              onTouchEnd={() => {
+                touchStartRef.current = null;
+                handledSwipeRef.current = false;
+              }}
+            />
+          </>
+        ) : (
+          <>
+            <img
+              src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
+              alt={project.title}
+              className="h-full w-full object-cover"
+              loading="lazy"
+              onError={(e) => {
+                e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
+              }}
+            />
+            <div className="pointer-events-none absolute inset-0 bg-black/38" />
+          </>
+        )}
+      </div>
+    </article>
+  );
+};
 
 const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const loopedItems = [...items, ...items, ...items];
+
+  const activateIndex = (index: number) => {
+    if (!api) return;
+    api.scrollTo(index);
+  };
 
   useEffect(() => {
     if (!api) return;
@@ -102,7 +146,13 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
             key={`${project.embedId}-${index}`}
             className="pl-4 basis-[82%] select-none sm:basis-[56%] lg:basis-[34%] xl:basis-[34%]"
           >
-            <ShortCard project={project} isActive={index === current} />
+            <ShortCard
+              project={project}
+              isActive={index === current}
+              onActivate={() => activateIndex(index)}
+              onSwipePrev={() => api?.scrollPrev()}
+              onSwipeNext={() => api?.scrollNext()}
+            />
           </CarouselItem>
         ))}
       </CarouselContent>
@@ -183,7 +233,7 @@ const ProjectSection = ({
                       </span>
                     </div>
                   </div>
-                  <div className="mx-auto max-w-5xl overflow-hidden rounded-[1.35rem] border-4 border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+                  <div className="mx-auto w-[calc(100%+0.5rem)] max-w-none -ml-1 overflow-hidden rounded-[1.2rem] border-[3px] border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:ml-0 sm:w-full sm:max-w-5xl sm:rounded-[1.35rem] sm:border-4">
                     <div className="relative aspect-video w-full">
                         <iframe
                           className="h-full w-full"
