@@ -91,40 +91,46 @@ const ShortCard = ({
               allowFullScreen
               onLoad={() => setIframeReady(true)}
             />
-            <div
-              className="absolute inset-0 z-10 md:hidden"
-              onTouchStart={(event) => {
-                const touch = event.touches[0];
-                touchStartRef.current = { x: touch.clientX, y: touch.clientY };
-                handledSwipeRef.current = false;
-              }}
-              onTouchMove={(event) => {
-                if (!touchStartRef.current || handledSwipeRef.current) return;
-                const touch = event.touches[0];
-                const deltaX = touch.clientX - touchStartRef.current.x;
-                const deltaY = touch.clientY - touchStartRef.current.y;
-                if (Math.abs(deltaX) > 18 && Math.abs(deltaY) < 28) {
-                  event.preventDefault();
-                }
-              }}
-              onTouchEnd={(event) => {
-                if (!touchStartRef.current || handledSwipeRef.current) {
+            {(["left", "right"] as const).map((side) => (
+              <div
+                key={side}
+                className={cn(
+                  "absolute top-0 bottom-0 z-10 w-[17%] md:hidden",
+                  side === "left" ? "left-0" : "right-0"
+                )}
+                onTouchStart={(event) => {
+                  const touch = event.touches[0];
+                  touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+                  handledSwipeRef.current = false;
+                }}
+                onTouchMove={(event) => {
+                  if (!touchStartRef.current || handledSwipeRef.current) return;
+                  const touch = event.touches[0];
+                  const deltaX = touch.clientX - touchStartRef.current.x;
+                  const deltaY = touch.clientY - touchStartRef.current.y;
+                  if (Math.abs(deltaX) > 18 && Math.abs(deltaY) < 28) {
+                    event.preventDefault();
+                  }
+                }}
+                onTouchEnd={(event) => {
+                  if (!touchStartRef.current || handledSwipeRef.current) {
+                    touchStartRef.current = null;
+                    handledSwipeRef.current = false;
+                    return;
+                  }
+                  const touch = event.changedTouches[0];
+                  const deltaX = touch.clientX - touchStartRef.current.x;
+                  const deltaY = touch.clientY - touchStartRef.current.y;
+                  if (Math.abs(deltaX) > 52 && Math.abs(deltaX) > Math.abs(deltaY) + 12) {
+                    handledSwipeRef.current = true;
+                    if (deltaX < 0) onSwipeNext();
+                    if (deltaX > 0) onSwipePrev();
+                  }
                   touchStartRef.current = null;
                   handledSwipeRef.current = false;
-                  return;
-                }
-                const touch = event.changedTouches[0];
-                const deltaX = touch.clientX - touchStartRef.current.x;
-                const deltaY = touch.clientY - touchStartRef.current.y;
-                if (Math.abs(deltaX) > 52 && Math.abs(deltaX) > Math.abs(deltaY) + 12) {
-                  handledSwipeRef.current = true;
-                  if (deltaX < 0) onSwipeNext();
-                  if (deltaX > 0) onSwipePrev();
-                }
-                touchStartRef.current = null;
-                handledSwipeRef.current = false;
-              }}
-            />
+                }}
+              />
+            ))}
           </>
         ) : (
           <div className="pointer-events-none absolute inset-0 bg-black/38" />
