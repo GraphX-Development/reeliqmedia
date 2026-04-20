@@ -51,8 +51,6 @@ const ShortCard = ({
     setIframeReady(false);
   }, [isActive, project.embedId]);
 
-  const watchOnYouTubeHref = `https://www.youtube.com/watch?v=${project.embedId}`;
-
   const handleSwipeStart = (event: TouchEvent<HTMLDivElement>) => {
     const touch = event.touches[0];
     touchStartRef.current = { x: touch.clientX, y: touch.clientY };
@@ -124,7 +122,7 @@ const ShortCard = ({
                 "absolute inset-0 h-full w-full transition-opacity duration-300",
                 iframeReady ? "opacity-100" : "opacity-0"
               )}
-              src={`https://www.youtube.com/embed/${project.embedId}?rel=0&controls=1&fs=1&playsinline=0&enablejsapi=1&modestbranding=1&hd=1&vq=hd1080`}
+              src={`https://www.youtube.com/embed/${project.embedId}?rel=0&controls=1&fs=1&playsinline=1&enablejsapi=1&modestbranding=1&hd=1&vq=hd1080`}
               title={project.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -156,22 +154,6 @@ const ShortCard = ({
           <div className="pointer-events-none absolute inset-0 bg-black/38" />
         )}
       </div>
-      {isActive ? (
-        <div className="flex items-center justify-between gap-3 border-t border-white/8 bg-black/35 px-4 py-3 md:hidden">
-          <p className="text-[11px] uppercase tracking-[0.22em] text-white/62">
-            Fullscreen + quality in YouTube
-          </p>
-          <a
-            href={watchOnYouTubeHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-2 text-[10px] font-semibold uppercase tracking-[0.24em] text-white transition-colors hover:bg-white/[0.1]"
-          >
-            Open
-            <ExternalLink className="h-3.5 w-3.5" />
-          </a>
-        </div>
-      ) : null}
     </article>
   );
 };
