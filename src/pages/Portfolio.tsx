@@ -229,6 +229,14 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
   const activeVideo = orderedVideos[0] ?? videos[0];
   const shelfVideos = orderedVideos.slice(1);
 
+  const getFixedVideoNumber = (video: HorizontalVideo) => {
+    const fingerprint = `${video.spineLabel} ${video.title}`.toLowerCase();
+    if (fingerprint.includes("anaconda")) return "01";
+    if (fingerprint.includes("strahl")) return "02";
+    if (fingerprint.includes("miniflex")) return "03";
+    return "00";
+  };
+
   const bringToFront = (index: number) => {
     setOrderedVideos((current) => {
       if (index <= 0 || index >= current.length) return current;
@@ -243,9 +251,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
   return (
     <div className="space-y-5">
       <div className="space-y-4 md:hidden">
-        <div className="relative overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.04] pt-3 pb-4 shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl">
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-3 bg-[linear-gradient(180deg,rgba(255,255,255,0.28),rgba(255,255,255,0.1))] backdrop-blur-md" />
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-4 bg-[linear-gradient(0deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] backdrop-blur-md" />
+        <div className="overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl">
           <div className="relative aspect-video w-full overflow-hidden bg-black">
             <iframe
               className="absolute inset-0 h-full w-full"
@@ -257,7 +263,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
             />
           </div>
         </div>
-        <div className="flex gap-3 overflow-x-auto pb-2">
+        <div className="space-y-3">
           {orderedVideos.map((video, index) => {
             const isActive = index === 0;
             return (
@@ -266,29 +272,36 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
                 type="button"
                 onClick={() => bringToFront(index)}
                 className={cn(
-                  "relative min-w-[5.75rem] overflow-hidden rounded-[1rem] border px-3 py-4 text-left transition-all duration-300",
+                  "relative flex w-full items-start gap-4 overflow-hidden rounded-[1.1rem] border px-4 py-4 text-left transition-all duration-300",
                   isActive
-                    ? "border-primary bg-primary/10 shadow-[0_12px_30px_rgba(7,130,255,0.18)]"
+                    ? "border-primary bg-primary/10 shadow-[0_14px_32px_rgba(7,130,255,0.18)]"
                     : "border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]"
                 )}
               >
-                <span className={cn("block font-mono text-xs font-bold tracking-[0.28em]", isActive ? "text-primary" : "text-white/38")}>
-                  {String(index + 1).padStart(2, "0")}
+                <span className={cn("shrink-0 font-mono text-sm font-bold tracking-[0.28em]", isActive ? "text-primary" : "text-white/38")}>
+                  {getFixedVideoNumber(video)}
                 </span>
-                <span className="mt-2 block font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80">
-                  {video.spineLabel}
-                </span>
-                <span className="mt-2 block text-sm font-semibold leading-tight text-white/92">
-                  {video.title}
-                </span>
+                <div className="min-w-0">
+                  <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80">
+                    {video.spineLabel}
+                  </span>
+                  <span className="mt-2 block text-sm font-semibold leading-tight text-white/92">
+                    {video.title}
+                  </span>
+                </div>
               </button>
             );
           })}
         </div>
         <div className="rounded-[1rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur-xl">
-          <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary">
-            {activeVideo.spineLabel}
-          </p>
+          <div className="flex items-center gap-3">
+            <span className="font-mono text-sm font-bold tracking-[0.28em] text-primary">
+              {getFixedVideoNumber(activeVideo)}
+            </span>
+            <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary">
+              {activeVideo.spineLabel}
+            </p>
+          </div>
           <h5 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight text-white">
             {activeVideo.title}
           </h5>
@@ -299,9 +312,11 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
       <div className="hidden md:block [perspective:2400px]">
         <div className="flex min-h-[29rem] items-stretch gap-4 overflow-visible rounded-[1.8rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] p-4 shadow-[0_22px_64px_rgba(0,0,0,0.2)] [transform-style:preserve-3d] xl:p-5">
           <div className="flex min-w-0 flex-[1.55] flex-col overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
-            <div className="relative overflow-hidden pt-4 pb-5">
-              <div className="pointer-events-none absolute inset-x-0 top-0 h-4 bg-[linear-gradient(180deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] backdrop-blur-lg" />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-5 bg-[linear-gradient(0deg,rgba(255,255,255,0.24),rgba(255,255,255,0.08))] backdrop-blur-lg" />
+            <div className="relative overflow-hidden pt-5 pb-6">
+              <div className="pointer-events-none absolute inset-x-0 top-0 h-5 bg-[linear-gradient(180deg,rgba(255,255,255,0.52),rgba(255,255,255,0.18)_42%,rgba(120,190,255,0.08))] opacity-95 backdrop-blur-xl" />
+              <div className="pointer-events-none absolute left-[12%] top-0 h-10 w-[38%] rounded-full bg-white/35 blur-2xl" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-6 bg-[linear-gradient(0deg,rgba(255,255,255,0.4),rgba(255,255,255,0.12)_48%,rgba(120,190,255,0.04))] opacity-90 backdrop-blur-xl" />
+              <div className="pointer-events-none absolute bottom-0 right-[14%] h-10 w-[34%] rounded-full bg-sky-200/20 blur-2xl" />
               <div className="relative aspect-video w-full overflow-hidden bg-black">
                 <iframe
                   key={activeVideo.embedId}
@@ -317,7 +332,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
             <div className="grid min-w-0 gap-4 border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] p-5 xl:grid-cols-[minmax(0,0.34fr)_minmax(0,1fr)] xl:items-start xl:p-6">
               <div className="flex items-center gap-3 xl:pt-1">
                 <span className="font-mono text-sm font-bold tracking-[0.28em] text-primary">
-                  01
+                  {getFixedVideoNumber(activeVideo)}
                 </span>
                 <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-primary">
                   {activeVideo.spineLabel}
@@ -349,7 +364,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
                   <div className="absolute inset-y-[10%] right-0 w-[1px] bg-black/30" />
                   <div className="flex min-h-full w-full flex-col justify-between rounded-[1.1rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-5">
                     <span className="font-mono text-[0.78rem] font-bold tracking-[0.28em] text-white/38 [text-orientation:mixed] [writing-mode:vertical-rl]">
-                      {String(swapIndex + 1).padStart(2, "0")}
+                      {getFixedVideoNumber(video)}
                     </span>
                     <span className="font-mono text-[0.68rem] uppercase tracking-[0.34em] text-primary/90 [text-orientation:mixed] [writing-mode:vertical-rl]">
                       {video.spineLabel}
