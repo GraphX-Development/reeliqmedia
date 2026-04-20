@@ -251,7 +251,7 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
   return (
     <div className="space-y-5">
       <div className="space-y-4 md:hidden">
-        <div className="overflow-hidden rounded-[1.15rem] border border-white/10 bg-white/[0.04] shadow-[0_18px_60px_rgba(0,0,0,0.22)] backdrop-blur-xl">
+        <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.28)]">
           <div className="relative aspect-video w-full overflow-hidden bg-black">
             <iframe
               className="absolute inset-0 h-full w-full"
@@ -261,6 +261,22 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
+          </div>
+          <div className="grid min-w-0 gap-4 border-t border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.07),rgba(255,255,255,0.03))] p-4">
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-sm font-bold tracking-[0.28em] text-primary">
+                {getFixedVideoNumber(activeVideo)}
+              </span>
+              <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary">
+                {activeVideo.spineLabel}
+              </p>
+            </div>
+            <div className="min-w-0">
+              <h5 className="font-display text-2xl font-bold uppercase tracking-tight text-white">
+                {activeVideo.title}
+              </h5>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{activeVideo.summary}</p>
+            </div>
           </div>
         </div>
         <div className="space-y-3">
@@ -292,20 +308,6 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
               </button>
             );
           })}
-        </div>
-        <div className="rounded-[1rem] border border-white/10 bg-white/[0.03] p-4 backdrop-blur-xl">
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-sm font-bold tracking-[0.28em] text-primary">
-              {getFixedVideoNumber(activeVideo)}
-            </span>
-            <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary">
-              {activeVideo.spineLabel}
-            </p>
-          </div>
-          <h5 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight text-white">
-            {activeVideo.title}
-          </h5>
-          <p className="mt-3 text-sm leading-relaxed text-white/70">{activeVideo.summary}</p>
         </div>
       </div>
 
