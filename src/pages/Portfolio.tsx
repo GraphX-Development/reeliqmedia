@@ -18,10 +18,16 @@ type ShortVideo = {
   embedId: string;
 };
 
+type HorizontalVideo = {
+  title: string;
+  summary: string;
+  embedId: string;
+  spineLabel: string;
+};
+
 type ClientProject = {
   title: string;
-  mainVideoTitle: string;
-  mainEmbedId: string;
+  horizontalVideos: HorizontalVideo[];
   shorts: ShortVideo[];
 };
 
@@ -213,6 +219,141 @@ const ShortsCarousel = ({ items }: { items: ShortVideo[] }) => {
   );
 };
 
+const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const activeVideo = videos[activeIndex] ?? videos[0];
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [videos]);
+
+  return (
+    <div className="space-y-5">
+      <div className="md:hidden">
+        <div className="overflow-hidden rounded-[1.2rem] border-[3px] border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)]">
+          <div className="relative aspect-video w-full">
+            <iframe
+              className="h-full w-full"
+              src={`https://www.youtube.com/embed/${activeVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+              title={activeVideo.title}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
+        <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
+          {videos.map((video, index) => {
+            const isActive = index === activeIndex;
+            return (
+              <button
+                key={video.embedId}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={cn(
+                  "relative min-w-[5.75rem] overflow-hidden rounded-[1rem] border px-3 py-4 text-left transition-all duration-300",
+                  isActive
+                    ? "border-primary bg-primary/10 shadow-[0_12px_30px_rgba(7,130,255,0.18)]"
+                    : "border-white/10 bg-black/40"
+                )}
+              >
+                <span className="block font-mono text-[10px] uppercase tracking-[0.3em] text-primary/80">
+                  {video.spineLabel}
+                </span>
+                <span className="mt-2 block text-sm font-semibold leading-tight text-white/92">
+                  {video.title}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="rounded-[1rem] border border-white/10 bg-white/[0.03] p-4">
+          <p className="font-mono text-[10px] uppercase tracking-[0.32em] text-primary">
+            {activeVideo.spineLabel}
+          </p>
+          <h5 className="mt-3 font-display text-2xl font-bold uppercase tracking-tight text-white">
+            {activeVideo.title}
+          </h5>
+          <p className="mt-3 text-sm leading-relaxed text-white/70">{activeVideo.summary}</p>
+        </div>
+      </div>
+
+      <div className="hidden md:block [perspective:2200px]">
+        <div className="flex min-h-[28rem] items-stretch gap-3 overflow-visible rounded-[1.6rem] border border-white/8 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-4 shadow-[0_22px_64px_rgba(0,0,0,0.2)] [transform-style:preserve-3d]">
+          {videos.map((video, index) => {
+            const isActive = index === activeIndex;
+            const isBeforeActive = index < activeIndex;
+
+            return (
+              <button
+                key={video.embedId}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                className={cn(
+                  "group relative flex min-w-0 items-stretch overflow-hidden rounded-[1.35rem] border border-white/10 bg-black/70 text-left transition-all duration-500 ease-out [transform-style:preserve-3d]",
+                  isActive
+                    ? "flex-[1.85] shadow-[0_28px_70px_rgba(0,0,0,0.34)]"
+                    : "flex-[0.22] cursor-pointer hover:border-primary/40 hover:bg-black/80"
+                )}
+                style={{
+                  transform: isActive
+                    ? "rotateY(0deg) translateZ(0px)"
+                    : `rotateY(${isBeforeActive ? 18 : -18}deg) translateZ(-28px)`,
+                }}
+              >
+                <div className="relative flex h-full min-h-[25rem] items-center justify-center bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))] px-4 py-6">
+                  <div className="absolute inset-y-3 right-0 w-px bg-white/10" />
+                  <span className="font-mono text-[0.72rem] uppercase tracking-[0.38em] text-white/78 [text-orientation:mixed] [writing-mode:vertical-rl]">
+                    {video.spineLabel}
+                  </span>
+                </div>
+
+                <div
+                  className={cn(
+                    "min-w-0 overflow-hidden transition-all duration-500 ease-out",
+                    isActive ? "flex-1 opacity-100" : "w-0 opacity-0"
+                  )}
+                >
+                  <div className="grid h-full min-w-0 grid-cols-[minmax(0,1.15fr)_minmax(18rem,0.85fr)]">
+                    <div className="flex items-center bg-black p-4 xl:p-5">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-[1rem] border border-white/10 shadow-[0_18px_44px_rgba(0,0,0,0.3)]">
+                        <iframe
+                          className="h-full w-full"
+                          src={`https://www.youtube.com/embed/${video.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+                          title={video.title}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      </div>
+                    </div>
+                    <div className="flex min-w-0 flex-col justify-between border-l border-white/10 bg-white/[0.03] p-5 xl:p-6">
+                      <div>
+                        <p className="font-mono text-[10px] uppercase tracking-[0.34em] text-primary">
+                          {video.spineLabel}
+                        </p>
+                        <h5 className="mt-3 font-display text-[2rem] font-bold uppercase leading-[0.95] tracking-tight text-white xl:text-[2.35rem]">
+                          {video.title}
+                        </h5>
+                        <p className="mt-4 text-sm leading-relaxed text-white/72 xl:text-[0.95rem]">
+                          {video.summary}
+                        </p>
+                      </div>
+                      <div className="mt-6 inline-flex w-fit items-center rounded-full border border-white/10 bg-black/30 px-4 py-2 font-mono text-[10px] uppercase tracking-[0.3em] text-white/78">
+                        Click another spine to rewrap this reel
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ProjectSection = ({
   project,
   isOpen,
@@ -221,96 +362,87 @@ const ProjectSection = ({
   project: ClientProject;
   isOpen: boolean;
   onToggle: () => void;
-}) => (
-  <section className="bg-card py-6 md:py-8">
-    <div className="container px-4">
-      <div className="overflow-hidden rounded-[2rem] border border-white/8 bg-background/35 shadow-[0_20px_70px_rgba(0,0,0,0.14)] transition-all duration-500">
-        <button
-          type="button"
-          onClick={onToggle}
-          aria-expanded={isOpen}
-          className="flex w-full flex-col items-start gap-5 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-7"
-        >
-          <div className="min-w-0 max-w-4xl">
-            <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
-              Client Project
-            </span>
-            <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
-              <h3 className="font-display text-[2.35rem] font-bold uppercase leading-[0.95] tracking-tight sm:text-[2.85rem] md:text-5xl">
-                {project.title}
-              </h3>
+}) => {
+  return (
+    <section className="bg-card py-6 md:py-8">
+      <div className="container px-4">
+        <div className="overflow-hidden rounded-[2rem] border border-white/8 bg-background/35 shadow-[0_20px_70px_rgba(0,0,0,0.14)] transition-all duration-500">
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-expanded={isOpen}
+            className="flex w-full flex-col items-start gap-5 px-5 py-5 text-left transition-colors hover:bg-white/[0.03] md:flex-row md:items-center md:justify-between md:gap-6 md:px-8 md:py-7"
+          >
+            <div className="min-w-0 max-w-4xl">
+              <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                Client Project
+              </span>
+              <div className="mt-3 flex flex-wrap items-center gap-3 md:gap-4">
+                <h3 className="font-display text-[2.35rem] font-bold uppercase leading-[0.95] tracking-tight sm:text-[2.85rem] md:text-5xl">
+                  {project.title}
+                </h3>
+              </div>
             </div>
-          </div>
 
-          <div className="flex w-full shrink-0 items-center md:w-auto">
-            <span className="inline-flex w-full items-center justify-between gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] backdrop-blur-md transition-all duration-300 md:w-auto md:px-4">
-              <span className="flex items-center gap-3">
+            <div className="flex w-full shrink-0 items-center md:w-auto">
+              <span className="inline-flex w-full items-center justify-between gap-3 rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-white shadow-[0_14px_34px_rgba(0,0,0,0.24)] backdrop-blur-md transition-all duration-300 md:w-auto md:px-4">
+                <span className="flex items-center gap-3">
+                  <span
+                    className={cn(
+                      "h-2.5 w-2.5 rounded-full transition-all duration-300",
+                      isOpen ? "bg-primary shadow-[0_0_18px_rgba(7,130,255,0.65)]" : "bg-white/35"
+                    )}
+                  />
+                  <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/88 sm:text-[11px]">
+                    {isOpen ? "Close Portfolio" : "Open Portfolio"}
+                  </span>
+                </span>
                 <span
                   className={cn(
-                    "h-2.5 w-2.5 rounded-full transition-all duration-300",
-                    isOpen ? "bg-primary shadow-[0_0_18px_rgba(7,130,255,0.65)]" : "bg-white/35"
+                    "flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/30 transition-all duration-300",
+                    isOpen ? "rotate-180 bg-primary/15 text-primary" : "rotate-0 text-white/80"
                   )}
-                />
-                <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/88 sm:text-[11px]">
-                  {isOpen ? "Close Portfolio" : "Open Portfolio"}
+                >
+                  <ChevronDown className="h-4 w-4" />
                 </span>
               </span>
-              <span
-                className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/30 transition-all duration-300",
-                  isOpen ? "rotate-180 bg-primary/15 text-primary" : "rotate-0 text-white/80"
-                )}
-              >
-                <ChevronDown className="h-4 w-4" />
-              </span>
-            </span>
-          </div>
-        </button>
+            </div>
+          </button>
 
-        <div
-          className={cn(
-            "grid transition-all duration-500 ease-out",
-            isOpen ? "grid-rows-[1fr] border-t border-border/80" : "grid-rows-[0fr]"
-          )}
-        >
-          <div className="overflow-hidden">
-            <div className="px-5 pb-5 pt-1 md:px-8 md:pb-8">
-              <div className="rounded-[1.75rem] bg-black/10 px-3 py-5 md:px-5 md:py-6">
-                <div>
-                  <div className="mb-5 flex items-end justify-between gap-4">
-                    <div>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
-                        Horizontal Video
-                      </span>
+          <div
+            className={cn(
+              "grid transition-all duration-500 ease-out",
+              isOpen ? "grid-rows-[1fr] border-t border-border/80" : "grid-rows-[0fr]"
+            )}
+          >
+            <div className="overflow-hidden">
+              <div className="px-5 pb-5 pt-1 md:px-8 md:pb-8">
+                <div className="rounded-[1.75rem] bg-black/10 px-3 py-5 md:px-5 md:py-6">
+                  <div>
+                    <div className="mb-5 flex items-end justify-between gap-4">
+                      <div>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                          Horizontal Video
+                        </span>
+                      </div>
                     </div>
+                    <HorizontalVideoShelf videos={project.horizontalVideos} />
                   </div>
-                  <div className="mx-auto w-[calc(100%+0.5rem)] max-w-none -ml-1 overflow-hidden rounded-[1.2rem] border-[3px] border-border bg-black shadow-[0_18px_60px_rgba(0,0,0,0.22)] sm:ml-0 sm:w-full sm:max-w-5xl sm:rounded-[1.35rem] sm:border-4">
-                    <div className="relative aspect-video w-full">
-                        <iframe
-                          className="h-full w-full"
-                          src={`https://www.youtube.com/embed/${project.mainEmbedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
-                          title={project.mainVideoTitle}
-                          frameBorder="0"
-                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                          allowFullScreen
-                        />
-                    </div>
-                  </div>
-                </div>
 
-                <div className="mt-8">
-                  <div className="mb-5 flex items-end justify-between gap-4">
-                    <div>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
-                        Shorts
-                      </span>
-                      <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
-                        Short-Form Cuts
-                      </h4>
+                  <div className="mt-8">
+                    <div className="mb-5 flex items-end justify-between gap-4">
+                      <div>
+                        <span className="font-mono text-[11px] uppercase tracking-[0.35em] text-primary">
+                          Shorts
+                        </span>
+                        <h4 className="mt-2 font-display text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                          Short-Form Cuts
+                        </h4>
+                      </div>
                     </div>
-                  </div>
-                  <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
-                    <ShortsCarousel items={project.shorts} />
+                    <div className="mx-auto w-full max-w-5xl px-0 md:px-6">
+                      <ShortsCarousel items={project.shorts} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -318,9 +450,9 @@ const ProjectSection = ({
           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default function Portfolio() {
   const [openProjects, setOpenProjects] = useState<string[]>([]);
@@ -334,8 +466,29 @@ export default function Portfolio() {
   const projects: ClientProject[] = [
     {
       title: "FIBERSCOPE | MEDITINC",
-      mainVideoTitle: "Meditinc Full Overview",
-      mainEmbedId: "eH93_kM6ctk",
+      horizontalVideos: [
+        {
+          title: "MiniFlex Camera Product Video",
+          summary:
+            "A focused product reel for the MiniFlex plumbing camera, presenting the compact system as a tight-radius inspection tool for FIBERSCOPE | MEDITINC.",
+          embedId: "3vsP-uEjZdU",
+          spineLabel: "MiniFlex",
+        },
+        {
+          title: "Downhole Well Camera Product Video",
+          summary:
+            "A STRAHL HD downhole well camera showcase built around deep-well inspection, positioning the unit as a rugged, high-clarity solution for FIBERSCOPE | MEDITINC.",
+          embedId: "HL08TPlCS94",
+          spineLabel: "STRAHL HD",
+        },
+        {
+          title: "Anaconda Pipe Camera Product Video",
+          summary:
+            "A product reel for the Anaconda pipe camera that emphasizes the system as a capable pipe-inspection option for FIBERSCOPE | MEDITINC.",
+          embedId: "Ezi1Z0gFEoo",
+          spineLabel: "Anaconda",
+        },
+      ],
       shorts: [
         {
           title: "Meditinc Fiberscope",
@@ -356,8 +509,15 @@ export default function Portfolio() {
     },
     {
       title: "REPIX HANDYMAN SERVICES",
-      mainVideoTitle: "Repix Service Showcase",
-      mainEmbedId: "Rq_jiv0Ccrw",
+      horizontalVideos: [
+        {
+          title: "Repix Service Showcase",
+          summary:
+            "A broader brand reel presenting REPIX Handyman Services through a polished service-overview format.",
+          embedId: "Rq_jiv0Ccrw",
+          spineLabel: "Repix",
+        },
+      ],
       shorts: [
         {
           title: "Repix Handyman",
