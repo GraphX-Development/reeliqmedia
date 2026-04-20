@@ -84,7 +84,7 @@ const ShortCard = ({
                 "absolute inset-0 h-full w-full transition-opacity duration-300",
                 iframeReady ? "opacity-100" : "opacity-0"
               )}
-              src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+              src={`https://www.youtube.com/embed/${project.embedId}?rel=0&controls=1&fs=1&playsinline=1&enablejsapi=1&modestbranding=1&hd=1&vq=hd1080`}
               title={project.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -362,7 +362,7 @@ export default function Portfolio() {
 
   return (
     <div className="flex w-full flex-col">
-      <section className="border-b border-border bg-background pb-20 pt-32">
+      <section className="border-b border-border bg-background pb-20 pt-40 md:pt-44">
         <div className="container px-4">
           <h1 className="mb-6 font-display text-6xl font-bold uppercase tracking-tighter md:text-8xl">
             Our <span className="text-primary">Work</span>
@@ -376,12 +376,12 @@ export default function Portfolio() {
       <section className="border-b border-border bg-card py-24 md:py-28">
         <div className="container max-w-[108rem] px-4">
           <div className="mx-auto rounded-[2.7rem] border border-white/8 bg-background/40 px-6 py-8 shadow-[0_24px_70px_rgba(0,0,0,0.16)] md:px-10 md:py-12 xl:px-16">
-            <div className="mx-auto grid min-h-[46rem] w-full max-w-[78rem] items-center gap-10 lg:grid-cols-[minmax(0,388px)_minmax(0,1fr)] lg:gap-16 xl:max-w-[82rem] xl:grid-cols-[minmax(0,420px)_minmax(0,1fr)] xl:gap-18">
-              <div className="w-full lg:justify-self-start lg:ml-3 xl:ml-5">
-                <div className="relative mx-auto aspect-[9/16] max-w-[25rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0">
+            <div className="mx-auto grid min-h-[42rem] w-full max-w-[76rem] items-center gap-10 lg:grid-cols-[minmax(0,340px)_minmax(0,1fr)] lg:gap-18 xl:max-w-[80rem] xl:grid-cols-[minmax(0,356px)_minmax(0,1fr)] xl:gap-20">
+              <div className="w-full lg:justify-self-start lg:ml-2 xl:ml-4">
+                <div className="relative mx-auto aspect-[9/16] max-w-[19.75rem] overflow-hidden rounded-3xl border-4 border-border shadow-2xl lg:mx-0 xl:max-w-[21rem]">
                   <iframe
                     className="h-full w-full"
-                    src={`https://www.youtube.com/embed/${featuredVideo.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
+                    src={`https://www.youtube.com/embed/${featuredVideo.embedId}?rel=0&controls=1&fs=1&playsinline=1&enablejsapi=1&modestbranding=1&hd=1&vq=hd1080`}
                     title={featuredVideo.title}
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -389,7 +389,7 @@ export default function Portfolio() {
                   />
                 </div>
               </div>
-              <div className="w-full max-w-[39rem] pl-0 lg:pl-1 xl:pl-2">
+              <div className="w-full max-w-[36rem] pl-0 lg:pl-2 xl:pl-3">
                 <span className="mb-4 block font-mono text-xs uppercase tracking-[0.32em] text-primary md:text-sm">
                   {featuredVideo.category}
                 </span>

@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10 lg:gap-12 xl:gap-14">
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span 
@@ -57,7 +57,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
             <Link href="/contact">
-              <Button variant="default" className="rounded-full font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 px-6">
+              <Button variant="default" className="rounded-full font-bold uppercase tracking-widest hover:bg-secondary hover:text-secondary-foreground transition-all duration-300 px-6 lg:px-7">
                 Get Started
               </Button>
             </Link>
