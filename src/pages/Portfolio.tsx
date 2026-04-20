@@ -40,6 +40,16 @@ const ShortCard = ({
 }) => {
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const handledSwipeRef = useRef(false);
+  const [iframeReady, setIframeReady] = useState(false);
+
+  useEffect(() => {
+    if (!isActive) {
+      setIframeReady(false);
+      return;
+    }
+
+    setIframeReady(false);
+  }, [isActive, project.embedId]);
 
   return (
     <article
@@ -54,15 +64,32 @@ const ShortCard = ({
       )}
     >
       <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[1.75rem] bg-black">
+        <img
+          src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
+          alt={project.title}
+          className={cn(
+            "h-full w-full object-cover transition-opacity duration-300",
+            isActive && iframeReady ? "opacity-0" : "opacity-100"
+          )}
+          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
+          }}
+        />
+
         {isActive ? (
           <>
             <iframe
-              className="h-full w-full"
+              className={cn(
+                "absolute inset-0 h-full w-full transition-opacity duration-300",
+                iframeReady ? "opacity-100" : "opacity-0"
+              )}
               src={`https://www.youtube.com/embed/${project.embedId}?rel=0&playsinline=1&modestbranding=1&hd=1&vq=hd1080`}
               title={project.title}
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
+              onLoad={() => setIframeReady(true)}
             />
             <div
               className="absolute inset-0 z-10 md:hidden"
@@ -76,31 +103,31 @@ const ShortCard = ({
                 const touch = event.touches[0];
                 const deltaX = touch.clientX - touchStartRef.current.x;
                 const deltaY = touch.clientY - touchStartRef.current.y;
-                if (Math.abs(deltaX) > 36 && Math.abs(deltaX) > Math.abs(deltaY) + 8) {
+                if (Math.abs(deltaX) > 18 && Math.abs(deltaY) < 28) {
+                  event.preventDefault();
+                }
+              }}
+              onTouchEnd={(event) => {
+                if (!touchStartRef.current || handledSwipeRef.current) {
+                  touchStartRef.current = null;
+                  handledSwipeRef.current = false;
+                  return;
+                }
+                const touch = event.changedTouches[0];
+                const deltaX = touch.clientX - touchStartRef.current.x;
+                const deltaY = touch.clientY - touchStartRef.current.y;
+                if (Math.abs(deltaX) > 52 && Math.abs(deltaX) > Math.abs(deltaY) + 12) {
                   handledSwipeRef.current = true;
                   if (deltaX < 0) onSwipeNext();
                   if (deltaX > 0) onSwipePrev();
                 }
-              }}
-              onTouchEnd={() => {
                 touchStartRef.current = null;
                 handledSwipeRef.current = false;
               }}
             />
           </>
         ) : (
-          <>
-            <img
-              src={`https://img.youtube.com/vi/${project.embedId}/hqdefault.jpg`}
-              alt={project.title}
-              className="h-full w-full object-cover"
-              loading="lazy"
-              onError={(e) => {
-                e.currentTarget.src = `https://img.youtube.com/vi/${project.embedId}/mqdefault.jpg`;
-              }}
-            />
-            <div className="pointer-events-none absolute inset-0 bg-black/38" />
-          </>
+          <div className="pointer-events-none absolute inset-0 bg-black/38" />
         )}
       </div>
     </article>
