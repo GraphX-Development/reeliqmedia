@@ -234,7 +234,9 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
     if (fingerprint.includes("anaconda")) return "01";
     if (fingerprint.includes("strahl")) return "02";
     if (fingerprint.includes("miniflex")) return "03";
-    return "00";
+
+    const originalIndex = videos.findIndex((entry) => entry.embedId === video.embedId);
+    return String((originalIndex >= 0 ? originalIndex : 0) + 1).padStart(2, "0");
   };
 
   const bringToFront = (index: number) => {
@@ -281,34 +283,39 @@ const HorizontalVideoShelf = ({ videos }: { videos: HorizontalVideo[] }) => {
             </div>
           </div>
         </div>
-        <div className="grid gap-2.5 sm:grid-cols-2">
-          {shelfVideos.map((video) => {
-            const swapIndex = orderedVideos.findIndex((entry) => entry.embedId === video.embedId);
-            return (
-              <button
-                key={video.embedId}
-                type="button"
-                onClick={() => bringToFront(swapIndex)}
-                className="group relative flex min-h-[5.9rem] w-full cursor-pointer items-stretch overflow-hidden rounded-[1.05rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))] text-left shadow-[0_18px_34px_rgba(0,0,0,0.2)] transition-all duration-500 ease-out hover:border-primary/45 hover:shadow-[0_22px_42px_rgba(7,130,255,0.16)]"
-              >
-                <div className="absolute inset-x-[6%] top-[0.38rem] h-[2px] rounded-full bg-white/35 blur-[0.5px]" />
-                <div className="absolute inset-x-[10%] bottom-0 h-[1px] bg-black/30" />
-                <div className="flex min-h-full w-full items-start gap-3 rounded-[0.95rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-3">
-                  <span className="shrink-0 font-mono text-[0.72rem] font-bold tracking-[0.24em] text-white/38">
-                    {getFixedVideoNumber(video)}
-                  </span>
-                  <div className="min-w-0">
-                    <span className="block font-mono text-[0.58rem] uppercase tracking-[0.26em] text-primary/90">
-                      {video.spineLabel}
+        <div className="flex overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div className="flex min-w-max items-start px-1">
+            {shelfVideos.map((video, shelfIndex) => {
+              const swapIndex = orderedVideos.findIndex((entry) => entry.embedId === video.embedId);
+              return (
+                <button
+                  key={video.embedId}
+                  type="button"
+                  onClick={() => bringToFront(swapIndex)}
+                  className="group relative -ml-2 first:ml-0 flex h-[4.7rem] w-[10.4rem] shrink-0 cursor-pointer items-stretch overflow-hidden rounded-[1.05rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.14),rgba(255,255,255,0.03))] text-left shadow-[0_18px_34px_rgba(0,0,0,0.2)] transition-all duration-500 ease-out hover:z-10 hover:border-primary/45 hover:shadow-[0_22px_42px_rgba(7,130,255,0.16)]"
+                  style={{ zIndex: shelfVideos.length - shelfIndex }}
+                >
+                  <div className="absolute inset-x-[6%] top-[0.38rem] h-[2px] rounded-full bg-white/35 blur-[0.5px]" />
+                  <div className="absolute inset-x-[10%] bottom-0 h-[1px] bg-black/30" />
+                  <div className="flex h-full w-full items-center gap-2 overflow-hidden rounded-[0.95rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.015))] px-3 py-2">
+                    <span className="shrink-0 font-mono text-[0.68rem] font-bold tracking-[0.22em] text-white/38">
+                      {getFixedVideoNumber(video)}
                     </span>
-                    <span className="mt-1.5 block font-mono text-[0.56rem] uppercase tracking-[0.16em] text-white/46">
-                      {video.title}
-                    </span>
+                    <div className="min-w-0 overflow-hidden">
+                      <div className="flex h-[2.25rem] flex-col justify-center overflow-hidden">
+                        <span className="block truncate font-mono text-[0.52rem] uppercase tracking-[0.24em] text-primary/90">
+                          {video.spineLabel}
+                        </span>
+                        <span className="mt-1 block truncate font-mono text-[0.5rem] uppercase tracking-[0.14em] text-white/46">
+                          {video.title}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </button>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
