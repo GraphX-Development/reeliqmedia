@@ -136,25 +136,12 @@ const ShortCard = ({
               onLoad={() => setIframeReady(true)}
             />
             <div
-              className="absolute inset-x-0 top-0 z-10 h-[22%] md:hidden"
+              className="absolute inset-0 z-10 md:hidden"
               aria-hidden="true"
               onTouchStart={handleSwipeStart}
               onTouchMove={handleSwipeMove}
               onTouchEnd={handleSwipeEnd}
             />
-            {(["left", "right"] as const).map((side) => (
-              <div
-                key={side}
-                className={cn(
-                  "absolute top-0 bottom-[28%] z-10 w-[14%] md:hidden",
-                  side === "left" ? "left-0" : "right-0"
-                )}
-                aria-hidden="true"
-                onTouchStart={handleSwipeStart}
-                onTouchMove={handleSwipeMove}
-                onTouchEnd={handleSwipeEnd}
-              />
-            ))}
           </>
         ) : (
           <div className="pointer-events-none absolute inset-0 bg-black/38" />
