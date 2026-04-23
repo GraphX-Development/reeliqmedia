@@ -47,14 +47,17 @@ const ShortCard = ({
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const handledSwipeRef = useRef(false);
   const [iframeReady, setIframeReady] = useState(false);
+  const [playerOpen, setPlayerOpen] = useState(false);
 
   useEffect(() => {
     if (!isActive) {
       setIframeReady(false);
+      setPlayerOpen(false);
       return;
     }
 
     setIframeReady(false);
+    setPlayerOpen(false);
   }, [isActive, project.embedId]);
 
   const handleSwipeStart = (event: TouchEvent<HTMLDivElement>) => {
@@ -98,7 +101,14 @@ const ShortCard = ({
   return (
     <article
       onClick={() => {
-        if (!isActive) onActivate();
+        if (!isActive) {
+          onActivate();
+          return;
+        }
+
+        if (!playerOpen) {
+          setPlayerOpen(true);
+        }
       }}
       className={cn(
         "overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-500 ease-out",
@@ -123,25 +133,29 @@ const ShortCard = ({
 
         {isActive ? (
           <>
-            <iframe
-              className={cn(
-                "absolute inset-0 h-full w-full transition-opacity duration-300",
-                iframeReady ? "opacity-100" : "opacity-0"
-              )}
-              src={`https://www.youtube.com/embed/${project.embedId}?rel=0&controls=1&fs=1&playsinline=1&enablejsapi=1&modestbranding=1&hd=1&vq=hd1080`}
-              title={project.title}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-              onLoad={() => setIframeReady(true)}
-            />
-            <div
-              className="absolute inset-0 z-10 md:hidden"
-              aria-hidden="true"
-              onTouchStart={handleSwipeStart}
-              onTouchMove={handleSwipeMove}
-              onTouchEnd={handleSwipeEnd}
-            />
+            {playerOpen ? (
+              <iframe
+                className={cn(
+                  "absolute inset-0 h-full w-full transition-opacity duration-300",
+                  iframeReady ? "opacity-100" : "opacity-0"
+                )}
+                src={`https://www.youtube.com/embed/${project.embedId}?autoplay=1&rel=0&controls=1&fs=1&playsinline=1&enablejsapi=1&modestbranding=1&hd=1&vq=hd1080`}
+                title={project.title}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                onLoad={() => setIframeReady(true)}
+              />
+            ) : (
+              <>
+                <div className="absolute inset-0 z-10 md:hidden" aria-hidden="true" onTouchStart={handleSwipeStart} onTouchMove={handleSwipeMove} onTouchEnd={handleSwipeEnd} />
+                <div className="absolute inset-x-[14%] bottom-[9%] z-20 flex justify-center md:hidden">
+                  <div className="rounded-full border border-white/16 bg-black/64 px-4 py-2 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-white/82 backdrop-blur-md">
+                    Tap to play
+                  </div>
+                </div>
+              </>
+            )}
           </>
         ) : (
           <div className="pointer-events-none absolute inset-0 bg-black/38" />
